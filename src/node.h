@@ -4,22 +4,23 @@
 #include "global.h"
 
 class Node {
-public:
+ public:
   Node();
-  Node(double mass, double* x);
+  Node(double mass, double* x, double *lowercorner, double *uppercorner);
   ~Node();
-
+  
   Node_Type whatami;
 
   double mass;    /**< mass of the particles in the node */
 
   double x[numdimen];
 
-  Node_pointer point; /*pointer to the next node in the tree*/
+  Node_pointer children; /*pointer to the child nodes*/
 
-  /*methods*/
-  void BearChildren();
+ private:
+   Node *BearChild(quad_octant_name quad_octant);
 
+   
 };
 
 typedef std::vector<Node> Node_pointer;
