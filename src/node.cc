@@ -1,27 +1,37 @@
 #include "node.h"
 
-Node::Node()
+Node::Node(double mass, double *x, double *lowercorner, double *uppercorner)
+  : lowercorntemp(lowercorner),
+    uppercorntemp(uppercorner),
 
-lowercorner_[numdimen];
-uppercorner_[numdimen];
-
-if(numdimen==2)
-  {
-    x_halfway = (uppercorner_[0] - lowercorner_[0])/2.0;
-    y_halfway = (uppercorner_[1] - lowercorner_[1])/2.0;
-  }
- else if(numdimen==3)
-   {
-    x_halfway = (uppercorner_[0] - lowercorner_[0])/2.0;
-    y_halfway = (uppercorner_[1] - lowercorner_[1])/2.0;
-    z_halfway = (uppercorner_[2] - lowercorner_[2])/2.0;
-  }
-
-
+{
+  lowercorner_[0] = lowercorner[0];
+  lowercorner_[1] = lowercorner[1];
+  uppercorner_[0] = uppercorner[0];
+  uppercorner_[1] = uppercorner[1];
+  if(numdimen == 3)
+    {
+      lowercorner_[2] = lowercorner_[2];
+      uppercorner_[2] = uppercorner_[2];
+    }
+}
+    
   for(int i=0; i<numchildren; i++)
     {
       children.push_back(NULL);
     }
+
+if(numdimen==2)
+  {
+    x_halfway = lowercorner_[0] + (uppercorner_[0] - lowercorner_[0])/2.0;
+    y_halfway = lowercorner_[1] + (uppercorner_[1] - lowercorner_[1])/2.0;
+  }
+ else if(numdimen==3)
+   {
+     x_halfway = lowercorner_[0] + (uppercorner_[0] - lowercorner_[0])/2.0;
+     y_halfway = lowercorner_[1] + (uppercorner_[1] - lowercorner_[1])/2.0;
+     z_halfway = lowercorner_[2] + (uppercorner_[2] - lowercorner_[2])/2.0;
+   }
 
 
 BearChild(quad_octant_name quad_octant)
@@ -121,7 +131,6 @@ BearChild(quad_octant_name quad_octant)
           uppercorner_temp[2] = uppercorner_[2];
         }
     }
-
 
   return Node(mass, x, lowercorner, uppercorner);
 }
