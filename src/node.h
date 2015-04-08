@@ -6,7 +6,7 @@
 class Node {
  public:
   Node();
-  Node(double mass, double* x, double *lowercorner, double *uppercorner);
+  Node(double mass, double *x, double *lowercorner, double *uppercorner);
   ~Node();
   
   Node_Type whatami;
