@@ -1,10 +1,9 @@
-#include "particle.h"
 #include "node.h"
-
+#include "particle.h"
 
 int main()
 {
-  numchildren = 4;
+  //numchildren = 4;
   
   Particle_vector particles;
   particles.push_back(Particle(1.0,1.0,1.0));

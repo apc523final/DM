@@ -77,11 +77,19 @@ Node Node::BearChild(quad_octant_name quad_octant)
         case lSW:
         case lSE:
           printf("Shouldn't be here\n");
+        case ROOT_:
+          printf("Seriously?!?\n");
         }
 
   return Node(quad_octant, lowercorner_temp, uppercorner_temp, LEAF);
     }
 }
+
+
+
+Node::~Node()
+
+{}
 
   /*else if(ndimen == 3)
     {
