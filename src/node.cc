@@ -1,4 +1,5 @@
 #include "node.h"
+#include "stdio.h"
 
 Node::Node(quad_octant_name quad_octant, double *lowercorner, double *uppercorner, Node_Type nodetype)
   :  quad_octant_(quad_octant),
@@ -71,10 +72,10 @@ Node Node::BearChild(quad_octant_name quad_octant)
           lowercorner_temp[1] = lowercorner_[1];
           uppercorner_temp[0] = x_halfway;
           uppercorner_temp[1] = y_halfway;
-        case uNW:
-        case uNE:
-        case uSW:
-        case uSE:
+        case lNW:
+        case lNE:
+        case lSW:
+        case lSE:
           printf("Shouldn't be here\n");
         }
 
