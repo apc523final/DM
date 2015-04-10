@@ -1,29 +1,37 @@
 #include "node.h"
 
-Node::Node(double mass, double *x, double *lowercorner, double *uppercorner)
-  : lowercorntemp(lowercorner),
-    uppercorntemp(uppercorner),
+Node::Node(quad_octant_name quad_octant, double *lowercorner, double *uppercorner, Node_Type nodetype)
+  :  quad_octant_(quad_octant),
+     lowercorntemp(lowercorner),
+     uppercorntemp(uppercorner),
+     whatami(nodetype)
 
 {
   lowercorner_[0] = lowercorner[0];
   lowercorner_[1] = lowercorner[1];
   uppercorner_[0] = uppercorner[0];
   uppercorner_[1] = uppercorner[1];
-  if(numdimen == 3)
+
+  x_halfway = lowercorner_[0] + (uppercorner_[0] - lowercorner_[0])/2.0;
+  y_halfway = lowercorner_[1] + (uppercorner_[1] - lowercorner_[1])/2.0;
+
+  //children.resize(numchildren);
+  /*if(numdimen == 3)
     {
       lowercorner_[2] = lowercorner_[2];
       uppercorner_[2] = uppercorner_[2];
-    }
-}
+      }*/
     
-  for(int i=0; i<numchildren; i++)
+  /*for(int i=0; i<numchildren; i++)
     {
-      children.push_back(NULL);
-    }
+      children.push_back(Node);
+      }*/
+  
+}
 
-if(numdimen==2)
+/*if(numdimen==2)
   {
-    x_halfway = lowercorner_[0] + (uppercorner_[0] - lowercorner_[0])/2.0;
+    x_halfway = Node.lowercorner_[0] + (Node.uppercorner_[0] - Node.lowercorner_[0])/2.0;
     y_halfway = lowercorner_[1] + (uppercorner_[1] - lowercorner_[1])/2.0;
   }
  else if(numdimen==3)
@@ -31,13 +39,13 @@ if(numdimen==2)
      x_halfway = lowercorner_[0] + (uppercorner_[0] - lowercorner_[0])/2.0;
      y_halfway = lowercorner_[1] + (uppercorner_[1] - lowercorner_[1])/2.0;
      z_halfway = lowercorner_[2] + (uppercorner_[2] - lowercorner_[2])/2.0;
-   }
+     }*/
 
 
-BearChild(quad_octant_name quad_octant)
+Node Node::BearChild(quad_octant_name quad_octant)
 {
 
-  if(ndimen == 2)
+  if(numdimen == 2)
     {
       double lowercorner_temp[2];
       double uppercorner_temp[2];
@@ -54,19 +62,22 @@ BearChild(quad_octant_name quad_octant)
           uppercorner_temp[0] = uppercorner_[0];
           uppercorner_temp[1] = uppercorner_[1];
         case SE:
-          lowercorner_temp[0] = x_halsway;
+          lowercorner_temp[0] = x_halfway;
           lowercorner_temp[1] = lowercorner_[1];
           uppercorner_temp[0] = uppercorner_[0];
           uppercorner_temp[1] = y_halfway;
         case SW:
           lowercorner_temp[0] = lowercorner_[0];
           lowercorner_temp[1] = lowercorner_[1];
-          uppercorner_temp[0] = x_halway;
+          uppercorner_temp[0] = x_halfway;
           uppercorner_temp[1] = y_halfway;
         }
-    }
 
-  else if(ndimen == 3)
+  return Node(quad_octant, lowercorner_temp, uppercorner_temp, LEAF);
+    }
+}
+
+  /*else if(ndimen == 3)
     {
       double lowercorner_temp[3];
       double uppercorner_temp[3];
@@ -87,7 +98,7 @@ BearChild(quad_octant_name quad_octant)
           uppercorner_temp[1] = uppercorner_[1];
           uppercorner_temp[2] = z_halfway;
         case lSE:
-          lowercorner_temp[0] = x_halsway;
+          lowercorner_temp[0] = x_halfway;
           lowercorner_temp[1] = lowercorner_[1];
           lowercorner_temp[2] = lowercorner_[2];
           uppercorner_temp[0] = uppercorner_[0];
@@ -116,7 +127,7 @@ BearChild(quad_octant_name quad_octant)
           uppercorner_temp[1] = uppercorner_[1];
           uppercorner_temp[2] = uppercorner_[2];
         case uSE:
-          lowercorner_temp[0] = x_halsway;
+          lowercorner_temp[0] = x_halfway;
           lowercorner_temp[1] = lowercorner_[1];
           lowercorner_temp[2] = z_halfway;
           uppercorner_temp[0] = uppercorner_[0];
@@ -129,8 +140,4 @@ BearChild(quad_octant_name quad_octant)
           uppercorner_temp[0] = x_halway;
           uppercorner_temp[1] = y_halfway;
           uppercorner_temp[2] = uppercorner_[2];
-        }
-    }
-
-  return Node(mass, x, lowercorner, uppercorner);
-}
+          }*/
