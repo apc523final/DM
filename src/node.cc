@@ -71,13 +71,9 @@ Node Node::BearChild(quad_octant_name quad_octant)
           lowercorner_temp[1] = lowercorner_[1];
           uppercorner_temp[0] = x_halfway;
           uppercorner_temp[1] = y_halfway;
-        case lNW:
         case uNW:
-        case lNE:
         case uNE:
-        case lSW:
         case uSW:
-        case lSE:
         case uSE:
           printf("Shouldn't be here\n");
         }
