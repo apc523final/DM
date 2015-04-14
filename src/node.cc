@@ -1,5 +1,5 @@
+#include <stdio.h>
 #include "node.h"
-#include "stdio.h"
 
 Node::Node(quad_octant_name quad_octant, double *lowercorner_, double *uppercorner_, Node_Type nodetype)
   :  quad_octant_(quad_octant),
@@ -45,7 +45,7 @@ Node::Node(quad_octant_name quad_octant, double *lowercorner_, double *uppercorn
      }*/
 
 
-Node Node::BearChild(quad_octant_name quad_octant)
+Node *Node::BearChild(quad_octant_name quad_octant)
 {
 
   if(numdimen == 2)

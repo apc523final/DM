@@ -1,5 +1,6 @@
+#include <stdio.h>
+#include "rootnode.h"
 #include "node.h"
-#include "stdio.h"
 
 RootNode::RootNode(double *lowercorner, double *uppercorner)
   :  lowercorntemp(lowercorner),
@@ -47,7 +48,7 @@ RootNode::RootNode(double *lowercorner, double *uppercorner)
      }*/
 
 
-Node RootNode::BearChild(quad_octant_name quad_octant)
+Node *RootNode::BearChild(quad_octant_name quad_octant)
 {
 
   if(numdimen == 2)
@@ -85,7 +86,7 @@ Node RootNode::BearChild(quad_octant_name quad_octant)
           printf("Seriously?!?\n");
         }
 
-  return Node(quad_octant, lowercorner_temp, uppercorner_temp, LEAF);
+  return *Node(quad_octant, lowercorner_temp, uppercorner_temp, LEAF);
     }
 }
 

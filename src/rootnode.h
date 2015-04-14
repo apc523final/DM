@@ -1,13 +1,14 @@
-#ifndef NODE_H_
-#define NODE_H_
+#ifndef ROOTNODE_H_
+#define ROOTNODE_H_
 
 #include <vector>
 #include "global.h"
+#include "node.h"
 
 
 class RootNode {
  public:
-  //Node();
+  //RootNode();
   RootNode(double *lowercorner, double *uppercorner);
   ~RootNode();
 
@@ -28,8 +29,8 @@ class RootNode {
   //std::vector<Node *> children(4); /*pointer to the child nodes*/
   Node *children[4];
 
-  Node BearChild(quad_octant_name quad_octant);
+  Node *BearChild(quad_octant_name quad_octant);
 
 };
 
-#endif //NODE_H_
+#endif //ROOTNODE_H_

@@ -23,7 +23,9 @@ int main()
 
   //RootNode root(lowercorner,uppercorner);
   Node root(SW, lowercorner, uppercorner, ROOT);
-  printf("%lf\n",root.lowercorner[0]);
+  printf("%lf %lf %lf %lf\n",root.lowercorner[0], root.lowercorner[1], root.uppercorner[0], root.uppercorner[1]);
+
+  RootNode root2(lowercorner, uppercorner);
   
   
   return 0;

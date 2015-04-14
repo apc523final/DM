@@ -8,7 +8,7 @@ CXX=g++
 %.o: %.cc
 	$(CXX) -c $(CFLAGS) -o $@ $^
 
-test: main.o node.o particle.o
+test: main.o node.o rootnode.o particle.o
 	$(CXX) $(CFLAGS) -o $@ $^
 
 clean:

@@ -29,7 +29,7 @@ class Node {
   //std::vector<Node *> children(4); /*pointer to the child nodes*/
   Node *children[4];
 
-  Node BearChild(quad_octant_name quad_octant);
+  Node *BearChild(quad_octant_name quad_octant);
 
    
 };
