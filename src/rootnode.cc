@@ -1,23 +1,25 @@
 #include "node.h"
 #include "stdio.h"
 
-Node::Node(quad_octant_name quad_octant, double *lowercorner_, double *uppercorner_, Node_Type nodetype)
-  :  quad_octant_(quad_octant),
-     lowercorntemp(lowercorner_),
-     uppercorntemp(uppercorner_),
-     whatami(nodetype)
+RootNode::RootNode(double *lowercorner, double *uppercorner)
+  :  lowercorntemp(lowercorner),
+     uppercorntemp(uppercorner),
+     whatami(ROOT)
 
 {
-  lowercorner[0] = lowercorntemp[0];
-  lowercorner[1] = lowercorntemp[1];
-  uppercorner[0] = uppercorntemp[0];
-  uppercorner[1] = uppercorntemp[1];
+  lowercorner_[0] = lowercorner[0];
+  lowercorner_[1] = lowercorner[1];
+  uppercorner_[0] = uppercorner[0];
+  uppercorner_[1] = uppercorner[1];
 
-  x_halfway = lowercorner[0] + (uppercorner[0] - lowercorner[0])/2.0;
-  y_halfway = lowercorner[1] + (uppercorner[1] - lowercorner[1])/2.0;
+  x_halfway = lowercorner_[0] + (uppercorner_[0] - lowercorner_[0])/2.0;
+  y_halfway = lowercorner_[1] + (uppercorner_[1] - lowercorner_[1])/2.0;
 
+  children[NW] = BearChild(NW);
+  children[NE] = BearChild(NE);
+  children[SE] = BearChild(SE);
+  children[SW] = BearChild(SW);
   
-
   //children.resize(numchildren);
   /*if(numdimen == 3)
     {
@@ -45,7 +47,7 @@ Node::Node(quad_octant_name quad_octant, double *lowercorner_, double *uppercorn
      }*/
 
 
-Node Node::BearChild(quad_octant_name quad_octant)
+Node RootNode::BearChild(quad_octant_name quad_octant)
 {
 
   if(numdimen == 2)
@@ -55,23 +57,23 @@ Node Node::BearChild(quad_octant_name quad_octant)
       switch(quad_octant)
         {
         case NW:
-          lowercorner_temp[0] = lowercorner[0];
+          lowercorner_temp[0] = lowercorner_[0];
           lowercorner_temp[1] = y_halfway;
           uppercorner_temp[0] = x_halfway;
-          uppercorner_temp[1] = uppercorner[1];
+          uppercorner_temp[1] = uppercorner_[1];
         case NE:
           lowercorner_temp[0] = x_halfway;
           lowercorner_temp[1] = y_halfway;
-          uppercorner_temp[0] = uppercorner[0];
-          uppercorner_temp[1] = uppercorner[1];
+          uppercorner_temp[0] = uppercorner_[0];
+          uppercorner_temp[1] = uppercorner_[1];
         case SE:
           lowercorner_temp[0] = x_halfway;
-          lowercorner_temp[1] = lowercorner[1];
-          uppercorner_temp[0] = uppercorner[0];
+          lowercorner_temp[1] = lowercorner_[1];
+          uppercorner_temp[0] = uppercorner_[0];
           uppercorner_temp[1] = y_halfway;
         case SW:
-          lowercorner_temp[0] = lowercorner[0];
-          lowercorner_temp[1] = lowercorner[1];
+          lowercorner_temp[0] = lowercorner_[0];
+          lowercorner_temp[1] = lowercorner_[1];
           uppercorner_temp[0] = x_halfway;
           uppercorner_temp[1] = y_halfway;
         case lNW:
@@ -89,7 +91,7 @@ Node Node::BearChild(quad_octant_name quad_octant)
 
 
 
-Node::~Node()
+RootNode::~RootNode()
 
 {}
 

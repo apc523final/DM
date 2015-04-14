@@ -5,18 +5,17 @@
 #include "global.h"
 
 
-class Node {
+class RootNode {
  public:
   //Node();
-  Node(quad_octant_name quad_octant, double *lowercorner_, double *uppercorner_, Node_Type nodetype);
-  ~Node();
+  RootNode(double *lowercorner, double *uppercorner);
+  ~RootNode();
 
-  quad_octant_name quad_octant_;
   double *lowercorntemp;
   double *uppercorntemp;
   Node_Type whatami;
-  double lowercorner[numdimen];
-  double uppercorner[numdimen];
+  double lowercorner_[numdimen];
+  double uppercorner_[numdimen];
 
   double x_halfway;
   double y_halfway;
@@ -31,9 +30,6 @@ class Node {
 
   Node BearChild(quad_octant_name quad_octant);
 
-   
 };
-
-//typedef std::vector<Node> Node_pointer;
 
 #endif //NODE_H_

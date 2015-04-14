@@ -1,4 +1,5 @@
 #include "node.h"
+#include "rootnode.h"
 #include "particle.h"
 
 int main()
@@ -18,12 +19,11 @@ int main()
   uppercorner[0]=2.0;
   uppercorner[1]=2.0;
 
-  double firstparticleposition[2];
-  firstparticleposition[0]=particles[0].x;
-  firstparticleposition[1]=particles[0].y;
 
 
-  Node(ROOT_,lowercorner,uppercorner,ROOT);
+  //RootNode root(lowercorner,uppercorner);
+  Node root(SW, lowercorner, uppercorner, ROOT);
+  printf("%lf\n",root.lowercorner[0]);
   
   
   return 0;
