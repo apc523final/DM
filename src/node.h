@@ -31,7 +31,6 @@ class Node {
 
   Node *BearChild(quad_octant_name quad_octant);
 
-   
 };
 
 //typedef std::vector<Node> Node_pointer;

@@ -83,7 +83,7 @@ Node *Node::BearChild(quad_octant_name quad_octant)
           printf("Seriously?!?\n");
         }
 
-  return Node(quad_octant, lowercorner_temp, uppercorner_temp, LEAF);
+  return new Node(quad_octant, lowercorner_temp, uppercorner_temp, LEAF);
     }
 }
 
@@ -91,7 +91,10 @@ Node *Node::BearChild(quad_octant_name quad_octant)
 
 Node::~Node()
 
-{}
+{
+  //Delete branch nodes
+
+}
 
   /*else if(ndimen == 3)
     {
