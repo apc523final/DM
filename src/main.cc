@@ -1,5 +1,5 @@
 #include "node.h"
-//#include "rootnode.h"
+#include "rootnode.h"
 #include "particle.h"
 
 int main()
@@ -21,8 +21,8 @@ int main()
 
 
 
-  //RootNode root(lowercorner,uppercorner);
-  Node root(SW, lowercorner, uppercorner, ROOT);
+  RootNode root(lowercorner,uppercorner);
+  Node sample(SW, lowercorner, uppercorner, ROOT);
   printf("%lf %lf %lf %lf\n",root.lowercorner[0], root.lowercorner[1], root.uppercorner[0], root.uppercorner[1]);
 
   //RootNode root2(lowercorner, uppercorner);

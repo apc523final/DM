@@ -9,14 +9,14 @@
 class RootNode {
  public:
   //RootNode();
-  RootNode(double *lowercorner, double *uppercorner);
+  RootNode(double *lowercorner_, double *uppercorner_);
   ~RootNode();
 
   double *lowercorntemp;
   double *uppercorntemp;
   Node_Type whatami;
-  double lowercorner_[numdimen];
-  double uppercorner_[numdimen];
+  double lowercorner[numdimen];
+  double uppercorner[numdimen];
 
   double x_halfway;
   double y_halfway;
