@@ -62,28 +62,38 @@ Node *RootNode::BearChild(quad_octant_name quad_octant)
           lowercorner_temp[1] = y_halfway;
           uppercorner_temp[0] = x_halfway;
           uppercorner_temp[1] = uppercorner[1];
+          break;
         case NE:
           lowercorner_temp[0] = x_halfway;
           lowercorner_temp[1] = y_halfway;
           uppercorner_temp[0] = uppercorner[0];
           uppercorner_temp[1] = uppercorner[1];
+          break;
         case SE:
           lowercorner_temp[0] = x_halfway;
           lowercorner_temp[1] = lowercorner[1];
           uppercorner_temp[0] = uppercorner[0];
           uppercorner_temp[1] = y_halfway;
+          break;
         case SW:
           lowercorner_temp[0] = lowercorner[0];
           lowercorner_temp[1] = lowercorner[1];
           uppercorner_temp[0] = x_halfway;
           uppercorner_temp[1] = y_halfway;
+          break;
+          //case uNW:
+          //case uNE:
+          //case uSW:
+          //case uSE:
         case lNW:
         case lNE:
         case lSW:
         case lSE:
           printf("Shouldn't be here\n");
+          break;
         case ROOT_:
           printf("Seriously?!?\n");
+          break;
         }
 
   return new Node(quad_octant, lowercorner_temp, uppercorner_temp, LEAF);
