@@ -104,7 +104,13 @@ Node *RootNode::BearChild(quad_octant_name quad_octant)
 
 RootNode::~RootNode()
 
-{}
+{
+  //Delete children
+  for(int i=0; i<numchildren; i++)
+    {
+      delete children[i];
+    }
+}
 
   /*else if(ndimen == 3)
     {

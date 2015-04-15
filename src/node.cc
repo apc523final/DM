@@ -17,7 +17,11 @@ Node::Node(quad_octant_name quad_octant, double *lowercorner_, double *uppercorn
   y_halfway = lowercorner[1] + (uppercorner[1] - lowercorner[1])/2.0;
 
   
-
+  for(int i=0; i<numchildren; i++)
+    {
+      children[i] = NULL;
+    }
+  
   //children.resize(numchildren);
   /*if(numdimen == 3)
     {
@@ -98,8 +102,14 @@ Node *Node::BearChild(quad_octant_name quad_octant)
 Node::~Node()
 
 {
-  //Delete branch nodes
-
+  //Delete children nodes
+  for(int i=0; i<numchildren; i++)
+    {
+      if(children[i] != NULL)
+        {
+          delete children[i];
+        }
+    }
 }
 
   /*else if(ndimen == 3)
