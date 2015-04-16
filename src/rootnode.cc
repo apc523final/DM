@@ -3,8 +3,8 @@
 #include "node.h"
 
 RootNode::RootNode(double *lowercorner_, double *uppercorner_)
-  :  lowercorntemp(lowercorner),
-     uppercorntemp(uppercorner),
+  :  lowercorntemp(lowercorner_),
+     uppercorntemp(uppercorner_),
      whatami(ROOT)
 
 {
