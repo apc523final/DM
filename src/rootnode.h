@@ -12,21 +12,25 @@ class RootNode {
   RootNode(double *lowercorner_, double *uppercorner_);
   ~RootNode();
 
-  double *lowercorntemp;
-  double *uppercorntemp;
-  Node_Type whatami;
   double lowercorner[numdimen];
   double uppercorner[numdimen];
 
-  double x_halfway;
-  double y_halfway;
 
   double mass;    /**< mass of the particles in the node */
   double com[numdimen];
+
+  double GetUpperEdge(int k);
+  double GetLowerEdge(int k);
     
  
  private:
   //std::vector<Node *> children(4); /*pointer to the child nodes*/
+  double *lowercorntemp;
+  double *uppercorntemp;
+  Node_Type whatami;
+  double x_halfway;
+  double y_halfway;
+  
   Node *children[numchildren];
 
   Node *BearChild(quad_octant_name quad_octant);

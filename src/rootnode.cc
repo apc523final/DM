@@ -100,6 +100,31 @@ Node *RootNode::BearChild(quad_octant_name quad_octant)
     }
 }
 
+double GetUpperEdge(int k)
+{
+  if(k>=numdimen)
+    {
+      printf("Trying to access an edge value greater than the number of dimensions: %d\n",k);
+      return 0.0;
+    }
+  else
+    {
+      return uppercorner[k];
+    }
+}
+
+double GetLowerEdge(int k)
+{
+  if(k>=numdimen)
+    {
+      printf("Trying to access an edge value greater than the number of dimensions: %d\n",k);
+      return 0.0;
+    }
+  else
+    {
+      return lowercorner[k];
+    }
+}
 
 
 RootNode::~RootNode()
