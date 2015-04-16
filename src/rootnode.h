@@ -19,8 +19,8 @@ class RootNode {
   double mass;    /**< mass of the particles in the node */
   double com[numdimen];
 
-  double GetUpperEdge(int k);
-  double GetLowerEdge(int k);
+  double GetUpperEdge(int k) const;
+  double GetLowerEdge(int k) const;
     
  
  private:
