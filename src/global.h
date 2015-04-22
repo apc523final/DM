@@ -4,7 +4,7 @@
 #include <cmath>
 
 enum Node_Type{PARENT, LEAF, ROOT, EMPTY};
-enum quad_octant_name{NW=0, NE, SE, SW, uNW=0, uNE, uSE, uSW, lNW, lNE, lSE, lSW, ROOT_=100};
+enum quad_octant_name{NW=0, NE, SE, SW, uNW=0, uNE, uSE, uSW, lNW, lNE, lSE, lSW, ROOT_=100, ERROR_=-1};
 
 const int numdimen = 2;
 const int numchildren = 4;

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "global.h"
+#include "particle.h"
 
 
 class Node {
@@ -30,6 +31,10 @@ class Node {
   Node *children[numchildren];
 
   Node *BearChild(quad_octant_name quad_octant);
+
+  void FigureParticle(Particle passed_particle);
+
+  quad_octant_name FigureQuadOctant(Particle particle_);
 
 };
 

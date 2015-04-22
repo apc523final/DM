@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "rootnode.h"
 #include "node.h"
+#include "particle.h"
 
 RootNode::RootNode(double *lowercorner_, double *uppercorner_)
   :  lowercorntemp(lowercorner_),
@@ -47,6 +48,50 @@ RootNode::RootNode(double *lowercorner_, double *uppercorner_)
      z_halfway = lowercorner_[2] + (uppercorner_[2] - lowercorner_[2])/2.0;
      }*/
 
+quad_octant_name FigureQuadOctant(Particle particle)
+{
+  if(numdimen == 2)
+    {
+      if(particle.x < RootNode::lowercorner[0] || particle.x > RootNode::uppercorner[0] || particle.y < RootNode::lowercorner[1] || particle.y > RootNode::uppercorner[1])
+        {
+          printf("Particle is outside the boundaries of the root node, don't know what to do with it.\n");
+          return ERROR_;
+        }
+
+      if(particle.x < RootNode::x_halfway)
+        {
+          if(particle.y < RootNode::y_halfway)
+            {
+              return SW;
+            }
+          else
+            {
+              return NW;
+            }
+        }
+      else
+        {
+          if(particle.y < RootNode::y_halfway)
+            {
+              return SE;
+            }
+          else
+            {
+              return NE;
+            }
+        }
+    }
+  else if(numdimen == 3)
+    {
+      printf("Not programmed yet, 3 dimensions for FigureQuadOctant");
+      return ERROR_;
+    }
+  else
+    {
+      printf("Don't know what to do with this number of dimensions: %d\n",numdimen);
+      return ERROR_;
+    }
+}
 
 Node *RootNode::BearChild(quad_octant_name quad_octant)
 {
@@ -96,7 +141,7 @@ Node *RootNode::BearChild(quad_octant_name quad_octant)
           break;
         }
 
-  return new Node(quad_octant, lowercorner_temp, uppercorner_temp, LEAF);
+  return new Node(quad_octant, lowercorner_temp, uppercorner_temp, EMPTY);
     }
 }
 
@@ -126,6 +171,12 @@ double RootNode::GetLowerEdge(int k) const
     }
 }
 
+void RootNode::PassParticle(Particle pass_particle);
+{
+  quad_octant_name q_o;
+  q_o = FigureQuadOctant(pass_particle);
+  children[q_o]->FigureParticle(pass_particle);
+}
 
 RootNode::~RootNode()
 

@@ -4,6 +4,7 @@
 #include <vector>
 #include "global.h"
 #include "node.h"
+#include "particle.h"
 
 
 class RootNode {
@@ -21,6 +22,10 @@ class RootNode {
 
   double GetUpperEdge(int k) const;
   double GetLowerEdge(int k) const;
+
+  Node *children[numchildren];
+
+  void PassParticle(Particle pass_particle);
     
  
  private:
@@ -31,9 +36,10 @@ class RootNode {
   double x_halfway;
   double y_halfway;
   
-  Node *children[numchildren];
+  //Node *children[numchildren];
 
   Node *BearChild(quad_octant_name quad_octant);
+  quad_octant_name FigureQuadOctant(Particle particle_);
 
 };
 

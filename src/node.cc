@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "node.h"
+#include "particle.h"
 
 Node::Node(quad_octant_name quad_octant, double *lowercorner_, double *uppercorner_, Node_Type nodetype)
   :  quad_octant_(quad_octant),
@@ -97,7 +98,55 @@ Node *Node::BearChild(quad_octant_name quad_octant)
     }
 }
 
+quad_octant_name FigureQuadOctant(Particle particle)
+{
+  if(numdimen == 2)
+    {
+      if(particle.x < Node::lowercorner[0] || particle.x > Node::uppercorner[0] || particle.y < Node::lowercorner[1] || particle.y > Node::uppercorner[1])
+        {
+          printf("Particle is outside the boundaries of the root node, don't know what to do with it.\n");
+          return -1;
+        }
 
+      if(particle.x < Node::x_halfway)
+        {
+          if(particle.y < Node::y_halfway)
+            {
+              return SW;
+            }
+          else
+            {
+              return NW;
+            }
+        }
+      else
+        {
+          if(particle.y < Node::y_halfway)
+            {
+              return SE;
+            }
+          else
+            {
+              return NE;
+            }
+        }
+    }
+  else if(numdimen == 3)
+    {
+      printf("Not programmed yet, 3 dimensions for FigureQuadOctant");
+      return -1;
+    }
+  else
+    {
+      printf("Don't know what to do with this number of dimensions: %d\n",numdimen);
+      return -1;
+    }
+}
+
+void FigureParticle(Particle passed_particle)
+{
+
+}
 
 Node::~Node()
 
