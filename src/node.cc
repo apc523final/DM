@@ -13,46 +13,20 @@ Node::Node(quad_octant_name quad_octant, double *lowercorner_, double *uppercorn
   lowercorner[1] = lowercorntemp[1];
   uppercorner[0] = uppercorntemp[0];
   uppercorner[1] = uppercorntemp[1];
-
+  
   x_halfway = lowercorner[0] + (uppercorner[0] - lowercorner[0])/2.0;
   y_halfway = lowercorner[1] + (uppercorner[1] - lowercorner[1])/2.0;
-
+  
   
   for(int i=0; i<numchildren; i++)
     {
       children[i] = NULL;
     }
-  
-  //children.resize(numchildren);
-  /*if(numdimen == 3)
-    {
-      lowercorner_[2] = lowercorner_[2];
-      uppercorner_[2] = uppercorner_[2];
-      }*/
-    
-  /*for(int i=0; i<numchildren; i++)
-    {
-      children.push_back(Node);
-      }*/
-  
 }
-
-/*if(numdimen==2)
-  {
-    x_halfway = Node.lowercorner_[0] + (Node.uppercorner_[0] - Node.lowercorner_[0])/2.0;
-    y_halfway = lowercorner_[1] + (uppercorner_[1] - lowercorner_[1])/2.0;
-  }
- else if(numdimen==3)
-   {
-     x_halfway = lowercorner_[0] + (uppercorner_[0] - lowercorner_[0])/2.0;
-     y_halfway = lowercorner_[1] + (uppercorner_[1] - lowercorner_[1])/2.0;
-     z_halfway = lowercorner_[2] + (uppercorner_[2] - lowercorner_[2])/2.0;
-     }*/
-
-
+  
 Node *Node::BearChild(quad_octant_name quad_octant)
 {
-
+  
   if(numdimen == 2)
     {
       double lowercorner_temp[2];
@@ -92,25 +66,28 @@ Node *Node::BearChild(quad_octant_name quad_octant)
         case ROOT_:
           printf("Seriously?!?\n");
           break;
+        case ERROR_:
+          printf("I got an erroneous quadrant value...\n");
+          break;
         }
-
-  return new Node(quad_octant, lowercorner_temp, uppercorner_temp, LEAF);
+      
+      return new Node(quad_octant, lowercorner_temp, uppercorner_temp, LEAF);
     }
 }
 
-quad_octant_name FigureQuadOctant(Particle particle)
+quad_octant_name Node::FigureQuadOctant(Particle particle)
 {
   if(numdimen == 2)
     {
-      if(particle.x < Node::lowercorner[0] || particle.x > Node::uppercorner[0] || particle.y < Node::lowercorner[1] || particle.y > Node::uppercorner[1])
+      if(particle.x < lowercorner[0] || particle.x > uppercorner[0] || particle.y < lowercorner[1] || particle.y > uppercorner[1])
+          {
+            printf("Particle is outside the boundaries of the root node, don't know what to do with it.\n");
+            return ERROR_;
+          }
+      
+      if(particle.x < x_halfway)
         {
-          printf("Particle is outside the boundaries of the root node, don't know what to do with it.\n");
-          return -1;
-        }
-
-      if(particle.x < Node::x_halfway)
-        {
-          if(particle.y < Node::y_halfway)
+          if(particle.y < y_halfway)
             {
               return SW;
             }
@@ -121,7 +98,7 @@ quad_octant_name FigureQuadOctant(Particle particle)
         }
       else
         {
-          if(particle.y < Node::y_halfway)
+          if(particle.y < y_halfway)
             {
               return SE;
             }
@@ -134,22 +111,22 @@ quad_octant_name FigureQuadOctant(Particle particle)
   else if(numdimen == 3)
     {
       printf("Not programmed yet, 3 dimensions for FigureQuadOctant");
-      return -1;
+      return ERROR_;
     }
   else
     {
       printf("Don't know what to do with this number of dimensions: %d\n",numdimen);
-      return -1;
+      return ERROR_;
     }
 }
 
-void FigureParticle(Particle passed_particle)
+void Node::FigureParticle(Particle passed_particle)
 {
-
+  printf("Here\n");
 }
 
 Node::~Node()
-
+  
 {
   //Delete children nodes
   for(int i=0; i<numchildren; i++)
@@ -161,23 +138,23 @@ Node::~Node()
     }
 }
 
-  /*else if(ndimen == 3)
-    {
-      double lowercorner_temp[3];
-      double uppercorner_temp[3];
-      switch(quad_octant)
-        {
-        case lNW:
-          lowercorner_temp[0] = lowercorner_[0];
-          lowercorner_temp[1] = y_halfway;
-          lowercorner_temp[2] = lowercorner_[2];
-          uppercorner_temp[0] = x_halfway;
-          uppercorner_temp[1] = uppercorner_[1];
-          uppercorner_temp[2] = z_halfway;
-        case lNE:
-          lowercorner_temp[0] = x_halfway;
-          lowercorner_temp[1] = y_halfway;
-          lowercorner_temp[2] = lowercorner_[2];
+/*else if(ndimen == 3)
+  {
+  double lowercorner_temp[3];
+  double uppercorner_temp[3];
+  switch(quad_octant)
+  {
+  case lNW:
+  lowercorner_temp[0] = lowercorner_[0];
+  lowercorner_temp[1] = y_halfway;
+  lowercorner_temp[2] = lowercorner_[2];
+  uppercorner_temp[0] = x_halfway;
+  uppercorner_temp[1] = uppercorner_[1];
+  uppercorner_temp[2] = z_halfway;
+  case lNE:
+  lowercorner_temp[0] = x_halfway;
+  lowercorner_temp[1] = y_halfway;
+  lowercorner_temp[2] = lowercorner_[2];
           uppercorner_temp[0] = uppercorner_[0];
           uppercorner_temp[1] = uppercorner_[1];
           uppercorner_temp[2] = z_halfway;

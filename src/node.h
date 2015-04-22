@@ -24,15 +24,14 @@ class Node {
 
   double mass;    /**< mass of the particles in the node */
   double com[numdimen];
-    
+
+  void FigureParticle(Particle passed_particle);
  
  private:
   //std::vector<Node *> children(4); /*pointer to the child nodes*/
   Node *children[numchildren];
 
   Node *BearChild(quad_octant_name quad_octant);
-
-  void FigureParticle(Particle passed_particle);
 
   quad_octant_name FigureQuadOctant(Particle particle_);
 

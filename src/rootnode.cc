@@ -48,19 +48,19 @@ RootNode::RootNode(double *lowercorner_, double *uppercorner_)
      z_halfway = lowercorner_[2] + (uppercorner_[2] - lowercorner_[2])/2.0;
      }*/
 
-quad_octant_name FigureQuadOctant(Particle particle)
+quad_octant_name RootNode::FigureQuadOctant(Particle particle)
 {
   if(numdimen == 2)
     {
-      if(particle.x < RootNode::lowercorner[0] || particle.x > RootNode::uppercorner[0] || particle.y < RootNode::lowercorner[1] || particle.y > RootNode::uppercorner[1])
+      if(particle.x < lowercorner[0] || particle.x > uppercorner[0] || particle.y < lowercorner[1] || particle.y > uppercorner[1])
         {
           printf("Particle is outside the boundaries of the root node, don't know what to do with it.\n");
           return ERROR_;
         }
 
-      if(particle.x < RootNode::x_halfway)
+      if(particle.x < x_halfway)
         {
-          if(particle.y < RootNode::y_halfway)
+          if(particle.y < y_halfway)
             {
               return SW;
             }
@@ -71,7 +71,7 @@ quad_octant_name FigureQuadOctant(Particle particle)
         }
       else
         {
-          if(particle.y < RootNode::y_halfway)
+          if(particle.y < y_halfway)
             {
               return SE;
             }
@@ -139,6 +139,9 @@ Node *RootNode::BearChild(quad_octant_name quad_octant)
         case ROOT_:
           printf("Seriously?!?\n");
           break;
+        case ERROR_:
+          printf("I got an erroneous quadrant value...\n");
+          break;
         }
 
   return new Node(quad_octant, lowercorner_temp, uppercorner_temp, EMPTY);
@@ -171,7 +174,7 @@ double RootNode::GetLowerEdge(int k) const
     }
 }
 
-void RootNode::PassParticle(Particle pass_particle);
+void RootNode::PassParticle(Particle pass_particle)
 {
   quad_octant_name q_o;
   q_o = FigureQuadOctant(pass_particle);
