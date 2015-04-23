@@ -71,7 +71,7 @@ Node *Node::BearChild(quad_octant_name quad_octant)
           break;
         }
       
-      return new Node(quad_octant, lowercorner_temp, uppercorner_temp, LEAF);
+      return new Node(quad_octant, lowercorner_temp, uppercorner_temp, EMPTY);
     }
 }
 
@@ -122,7 +122,64 @@ quad_octant_name Node::FigureQuadOctant(Particle particle)
 
 void Node::FigureParticle(Particle passed_particle)
 {
-  printf("Here\n");
+  quad_octant_name qo;
+  qo = FigureQuadOctant(passed_particle);
+  
+  if(whatami == PARENT)
+    {
+      if(children[qo] == NULL)
+        {
+          children[qo] = BearChild(qo);
+        }
+      UpdateCOM(passed_particle);
+      children[qo]->FigureParticle(passed_particle);
+    }
+
+  else if(whatami == LEAF)
+    {
+      UpdateCOM(passed_particle);
+      
+      children[qo] = BearChild(qo);
+      children[qo]->FigureParticle(passed_particle);
+
+      quad_octant_name qo2;
+      qo2 = FigureQuadOctant(*particle_leaf);
+      children[qo2]->FigureParticle(*particle_leaf);
+      
+      particle_leaf = NULL;
+      whatami = PARENT;
+    }
+
+  else if(whatami == EMPTY)
+      {
+        mass = passed_particle.mass;
+        com[0] = passed_particle.x;
+        com[1] = passed_particle.y;
+        /*if(numdimen == 3)
+          {
+            com[2] = passed_particle.z;
+            }*/
+        particle_leaf = &passed_particle;
+        whatami = LEAF;
+      }
+  else if(whatami == ROOT)
+    {
+      printf("I'm dealing with a ROOT node?  Here?  Whaaaat?\n");
+    }
+}
+
+void Node::UpdateCOM(Particle passed_particle)
+{
+  double weighted_x = mass*com[0] + passed_particle.mass * passed_particle.x;
+  com[0] = weighted_x / (mass + passed_particle.mass);
+  double weighted_y = mass*com[1] + passed_particle.mass * passed_particle.y;
+  com[1] = weighted_y / (mass + passed_particle.mass);
+  /*if(numdimen == 3)
+    {
+      double weighted_z = mass*com[2] + passed_particle.mass * passed_particle.z;
+      com[2] = weighted_z / (mass + passed_particle.mass);
+      }*/
+  mass += passed_particle.mass;
 }
 
 Node::~Node()

@@ -22,6 +22,8 @@ class Node {
   double x_halfway;
   double y_halfway;
 
+  Particle *particle_leaf;
+
   double mass;    /**< mass of the particles in the node */
   double com[numdimen];
 
@@ -34,6 +36,8 @@ class Node {
   Node *BearChild(quad_octant_name quad_octant);
 
   quad_octant_name FigureQuadOctant(Particle particle_);
+
+  void UpdateCOM(Particle passed_particle);
 
 };
 
