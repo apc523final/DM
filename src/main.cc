@@ -29,6 +29,11 @@ int main()
   printf("SE corner: %lf %lf %lf %lf\n",root.children[SE]->lowercorner[0],root.children[SE]->lowercorner[1],root.children[SE]->uppercorner[0],root.children[SE]->uppercorner[1]);
   printf("SW corner: %lf %lf %lf %lf\n",root.children[SW]->lowercorner[0],root.children[SW]->lowercorner[1],root.children[SW]->uppercorner[0],root.children[SW]->uppercorner[1]);
 
+  for(int i=0; i<particles.size(); i++)
+    {
+      root.PassParticle(particles[i]);
+    }
+
   //RootNode root2(lowercorner, uppercorner);
   
   
