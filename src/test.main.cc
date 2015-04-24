@@ -49,7 +49,6 @@ int main()
 
 
   RootNode root(lowercorner,uppercorner);
-  Node sample(SW, lowercorner, uppercorner, ROOT);
   //printf("Root limits: %lf %lf %lf %lf\n",root.lowercorner[0], root.lowercorner[1], root.uppercorner[0], root.uppercorner[1]);
   //printf("NW corner: %lf %lf %lf %lf\n",root.children[NW]->lowercorner[0],root.children[NW]->lowercorner[1],root.children[NW]->uppercorner[0],root.children[NE]->uppercorner[1]);
   //printf("NE corner: %lf %lf %lf %lf\n",root.children[NE]->lowercorner[0],root.children[NE]->lowercorner[1],root.children[NE]->uppercorner[0],root.children[NE]->uppercorner[1]);
@@ -93,6 +92,32 @@ int main()
       checkerror_double(root.children[i]->mass,particles[i].mass,"Mass Error Initial",i);
       checkerror_double(root.children[i]->com[0],particles[i].x,"X Position Error Initial",i);
       checkerror_double(root.children[i]->com[1],particles[i].y,"Y Position Error Initial",i);
+
+      //checkerror_double(root.children[i]->particle_leaf->x,particles[i].x,"X Position Error particle_leaf",i);
+      //checkerror_double(root.children[i]->particle_leaf->y,particles[i].y,"Y Position Error particle_leaf",i);
+    }
+
+  double mass2 = 2.0;
+  Particle particle5;
+  printf("    before:  x:%e   y:%e   Mass: %e\n",root.children[NW]->particle_leaf->x,root.children[NW]->particle_leaf->y,root.children[NW]->particle_leaf->mass);
+  particle5 = Particle(mass2,-1.5,1.5);
+  particles.push_back(particle5);
+  //printf("%e   %e\n",particle5.x,particle5.y);
+  
+  root.PassParticle(particle5);
+  
+  checkerror_int(root.children[NW]->whatami,PARENT,"Parent Error Initial");
+  checkerror_double(root.children[NW]->children[NW]->mass,mass2,"Parent passing particle correctly");
+  checkerror_double(root.children[NW]->children[NE]->mass,1.0,"Parent passing existing particle correctly");
+  if(!(root.children[NW]->children[SW] == NULL))
+    {
+      printf("ERROR DETECTED!!!! A node which shouldn't exist does!  The SW one\n");
+      numerrors++;
+    }
+    if(!(root.children[NW]->children[SE] == NULL))
+    {
+      printf("ERROR DETECTED!!!! A node which shouldn't exist does!  The SE one\n");
+      numerrors++;
     }
   
   printf("*********\n Total number of errors: %d\n********\n",numerrors);

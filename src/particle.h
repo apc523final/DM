@@ -7,6 +7,7 @@
 
 class Particle {
  public:
+  Particle();
   Particle(double mass, double x, double y);
   ~Particle();
 

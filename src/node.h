@@ -28,10 +28,10 @@ class Node {
   double com[numdimen];
 
   void FigureParticle(Particle passed_particle);
+  Node *children[numchildren];
  
  private:
   //std::vector<Node *> children(4); /*pointer to the child nodes*/
-  Node *children[numchildren];
 
   Node *BearChild(quad_octant_name quad_octant);
 

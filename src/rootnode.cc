@@ -22,18 +22,6 @@ RootNode::RootNode(double *lowercorner_, double *uppercorner_)
   children[SE] = BearChild(SE);
   children[SW] = BearChild(SW);
   
-  //children.resize(numchildren);
-  /*if(numdimen == 3)
-    {
-      lowercorner_[2] = lowercorner_[2];
-      uppercorner_[2] = uppercorner_[2];
-      }*/
-    
-  /*for(int i=0; i<numchildren; i++)
-    {
-      children.push_back(Node);
-      }*/
-  
 }
 
 /*if(numdimen==2)
@@ -95,7 +83,7 @@ quad_octant_name RootNode::FigureQuadOctant(Particle particle)
 
 Node *RootNode::BearChild(quad_octant_name quad_octant)
 {
-
+  //printf("Root node bearing child, quadrant %d\n", quad_octant);
   if(numdimen == 2)
     {
       double lowercorner_temp[2];
@@ -176,9 +164,18 @@ double RootNode::GetLowerEdge(int k) const
 
 void RootNode::PassParticle(Particle pass_particle)
 {
-  quad_octant_name q_o;
-  q_o = FigureQuadOctant(pass_particle);
-  children[q_o]->FigureParticle(pass_particle);
+  if(whatami == ROOT)
+    {
+      //printf("Root passing particle, with mass %e\n",pass_particle.mass);
+      quad_octant_name q_o;
+      q_o = FigureQuadOctant(pass_particle);
+      //printf("      passing particle going to quadrant %d\n",q_o);
+      children[q_o]->FigureParticle(pass_particle);
+    }
+  else
+    {
+      printf("What is going on?  I am supposed to be the ROOT node, but I am not.  I am the %d node\n",whatami);
+    }
 }
 
 RootNode::~RootNode()
