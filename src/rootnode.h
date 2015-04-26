@@ -25,7 +25,8 @@ class RootNode {
 
   Node *children[numchildren];
 
-  void PassParticle(Particle pass_particle);
+  //void PassParticle(Particle pass_particle, int particle_number);
+  void PassParticle(Particle_vector_element_pointer pass_particle);
     
  
  private:

@@ -9,6 +9,7 @@ enum quad_octant_name{NW=0, NE, SE, SW, uNW=0, uNE, uSE, uSW, lNW, lNE, lSE, lSW
 const int numdimen = 2;
 const int numchildren = 4;
 
+
 /*if(numdimen == 2)
   {
     numchildren = 4;

@@ -121,7 +121,7 @@ quad_octant_name Node::FigureQuadOctant(Particle particle)
     }
 }
 
-void Node::FigureParticle(Particle passed_particle)
+void Node::FigureParticle(Particle passed_particle, int particle_number)
 {
   //printf("I am a node, type %d, quadrant %d, figuring what to do with a particle.\n",whatami,quad_octant_);
   if(whatami == LEAF) printf("        my current particle is at  %e  %e\n",particle_leaf->x,particle_leaf->y);
@@ -138,7 +138,7 @@ void Node::FigureParticle(Particle passed_particle)
           children[qo] = BearChild(qo);
         }
       UpdateCOM(passed_particle);
-      children[qo]->FigureParticle(passed_particle);
+      children[qo]->FigureParticle(passed_particle, particle_number);
     }  
   else if(whatami == LEAF)
     {
@@ -151,7 +151,7 @@ void Node::FigureParticle(Particle passed_particle)
       UpdateCOM(passed_particle);
       
       children[qo] = BearChild(qo);
-      children[qo]->FigureParticle(passed_particle);
+      children[qo]->FigureParticle(passed_particle, particle_number);
       
       quad_octant_name qo2;
       printf("        figuring what to do with particle I already have\n");

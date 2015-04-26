@@ -162,7 +162,7 @@ double RootNode::GetLowerEdge(int k) const
     }
 }
 
-void RootNode::PassParticle(Particle pass_particle)
+void RootNode::PassParticle(Particle_vector_element_pointer  pass_particle)
 {
   if(whatami == ROOT)
     {
@@ -170,7 +170,7 @@ void RootNode::PassParticle(Particle pass_particle)
       quad_octant_name q_o;
       q_o = FigureQuadOctant(pass_particle);
       //printf("      passing particle going to quadrant %d\n",q_o);
-      children[q_o]->FigureParticle(pass_particle);
+      children[q_o]->FigureParticle(pass_particle, particle_number);
     }
   else
     {
