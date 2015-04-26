@@ -82,7 +82,7 @@ int main()
 
   for(int i=0; i<particles.size(); i++)
     {
-      root.PassParticle(particles[i], i);
+      root.PassParticle(&particles[i]);
     }
 
   for(int i=0; i<4; i++)
@@ -104,7 +104,7 @@ int main()
   particles.push_back(particle5);
   //printf("%e   %e\n",particle5.x,particle5.y);
   
-  root.PassParticle(particle5,4);
+  root.PassParticle(&particles[4]);
   
   checkerror_int(root.children[NW]->whatami,PARENT,"Parent Error Initial");
   checkerror_double(root.children[NW]->children[NW]->mass,mass2,"Parent passing particle correctly");

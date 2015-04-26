@@ -162,15 +162,15 @@ double RootNode::GetLowerEdge(int k) const
     }
 }
 
-void RootNode::PassParticle(Particle_vector_element_pointer  pass_particle)
+void RootNode::PassParticle(Particle_vector_element_pointer pass_particle)
 {
   if(whatami == ROOT)
     {
       //printf("Root passing particle, with mass %e\n",pass_particle.mass);
       quad_octant_name q_o;
-      q_o = FigureQuadOctant(pass_particle);
+      q_o = FigureQuadOctant(*pass_particle);
       //printf("      passing particle going to quadrant %d\n",q_o);
-      children[q_o]->FigureParticle(pass_particle, particle_number);
+      children[q_o]->FigureParticle(pass_particle);
     }
   else
     {

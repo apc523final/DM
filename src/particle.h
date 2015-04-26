@@ -21,6 +21,6 @@ class Particle {
 
 typedef std::vector<Particle> Particle_vector;
 
-typedef vector<Particle>::pointer Particle_vector_element_pointer;
+typedef std::vector<Particle>::pointer Particle_vector_element_pointer;
 
 #endif //PARTICLE_H_

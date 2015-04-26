@@ -121,7 +121,7 @@ quad_octant_name Node::FigureQuadOctant(Particle particle)
     }
 }
 
-void Node::FigureParticle(Particle passed_particle, int particle_number)
+void Node::FigureParticle(Particle_vector_element_pointer passed_particle)
 {
   //printf("I am a node, type %d, quadrant %d, figuring what to do with a particle.\n",whatami,quad_octant_);
   if(whatami == LEAF) printf("        my current particle is at  %e  %e\n",particle_leaf->x,particle_leaf->y);
@@ -130,28 +130,28 @@ void Node::FigureParticle(Particle passed_particle, int particle_number)
   if(whatami == PARENT)
     {
       quad_octant_name qo;
-      qo = FigureQuadOctant(passed_particle);
+      qo = FigureQuadOctant(*passed_particle);
       //printf("       I am a parent, passed particle will go to quadrant %d\n",qo);
       
       if(children[qo] == NULL)
         {
           children[qo] = BearChild(qo);
         }
-      UpdateCOM(passed_particle);
-      children[qo]->FigureParticle(passed_particle, particle_number);
+      UpdateCOM(*passed_particle);
+      children[qo]->FigureParticle(passed_particle);
     }  
   else if(whatami == LEAF)
     {
       quad_octant_name qo;
-      qo = FigureQuadOctant(passed_particle);
+      qo = FigureQuadOctant(*passed_particle);
       printf("       I am a leaf, passed particle will go to quadrant %d\n",qo);
       printf("        my current particle is at  %e  %e\n",particle_leaf->x,particle_leaf->y);
-      printf("         passed particle is at   %e  %e\n",passed_particle.x,passed_particle.y);
+      printf("         passed particle is at   %e  %e\n",passed_particle->x,passed_particle->y);
       
-      UpdateCOM(passed_particle);
+      UpdateCOM(*passed_particle);
       
       children[qo] = BearChild(qo);
-      children[qo]->FigureParticle(passed_particle, particle_number);
+      children[qo]->FigureParticle(passed_particle);
       
       quad_octant_name qo2;
       printf("        figuring what to do with particle I already have\n");
@@ -162,12 +162,12 @@ void Node::FigureParticle(Particle passed_particle, int particle_number)
       if(qo == qo2)
         {
           printf("            qo is equal to qo2\n");
-          children[qo]->FigureParticle(*particle_leaf);
+          children[qo]->FigureParticle(particle_leaf);
         }
       else
         {
           children[qo2] = BearChild(qo2);
-          children[qo2]->FigureParticle(*particle_leaf);
+          children[qo2]->FigureParticle(particle_leaf);
         }
       particle_leaf = NULL;
       whatami = PARENT;
@@ -175,14 +175,14 @@ void Node::FigureParticle(Particle passed_particle, int particle_number)
   else if(whatami == EMPTY)
     {
       printf("    I am an empty node\n");
-      mass = passed_particle.mass;
-      com[0] = passed_particle.x;
-      com[1] = passed_particle.y;
+      mass = passed_particle->mass;
+      com[0] = passed_particle->x;
+      com[1] = passed_particle->y;
       /*if(numdimen == 3)
         {
         com[2] = passed_particle.z;
         }*/
-      particle_leaf = &passed_particle;
+      particle_leaf = passed_particle;
       whatami = LEAF;
       printf("    I am no longer empty!  Got a particle with mass %e\n",mass);
     }  

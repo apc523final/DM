@@ -22,13 +22,14 @@ class Node {
   double x_halfway;
   double y_halfway;
 
-  //Particle *particle_leaf;
-  int particle_number_leaf;
+  Particle_vector_element_pointer particle_leaf;
+  //int particle_number_leaf;
 
   double mass;    /**< mass of the particles in the node */
   double com[numdimen];
 
-  void FigureParticle(Particle passed_particle, int particle_number);
+  //void FigureParticle(Particle passed_particle, int particle_number);
+  void FigureParticle(Particle_vector_element_pointer passed_particle);
   Node *children[numchildren];
  
  private:
