@@ -12,4 +12,4 @@ test: test.main.o node.o particle.o rootnode.o
 	$(CXX) $(CFLAGS) -o $@ $^
 
 clean:
-	-rm -rf *.o
+	-rm -rf *.o test

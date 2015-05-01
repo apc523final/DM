@@ -2,57 +2,58 @@
 #include "node.h"
 #include "particle.h"
 
+//Creator of Node
 Node::Node(quad_octant_name quad_octant, double *lowercorner_, double *uppercorner_, Node_Type nodetype)
-  :  quad_octant_(quad_octant),
-     lowercorntemp(lowercorner_),
-     uppercorntemp(uppercorner_),
-     whatami(nodetype)
+  :  quad_octant_(quad_octant), //Set what quadrant/octant of the parent node this node belongs to.
+     lowercorntemp(lowercorner_), //Temporary pointer used to pass the lower corner values to the node
+     uppercorntemp(uppercorner_), //Temporary pointer used to pass the upper corner values to the node
+     whatami(nodetype) //What type of node is the node: PARENT, LEAF, EMPTY, ROOT
 
 {
-  lowercorner[0] = lowercorntemp[0];
-  lowercorner[1] = lowercorntemp[1];
-  uppercorner[0] = uppercorntemp[0];
-  uppercorner[1] = uppercorntemp[1];
-  //printf("New Node Created!  Values:  %e    %e   %e   %e,   %d,  %d\n",lowercorner[0],lowercorner[1],uppercorner[0],uppercorner[1],quad_octant,nodetype);
+  lowercorner[0] = lowercorntemp[0]; //Set x-coordinate of the lower corner
+  lowercorner[1] = lowercorntemp[1]; //Set y-coordinate of the lower corner
+  uppercorner[0] = uppercorntemp[0]; //Set x-coordinate of the upper corner
+  uppercorner[1] = uppercorntemp[1]; //Set y-coordinate of the upper corner
   
-  x_halfway = lowercorner[0] + (uppercorner[0] - lowercorner[0])/2.0;
-  y_halfway = lowercorner[1] + (uppercorner[1] - lowercorner[1])/2.0;
-  
-  
+  x_halfway = lowercorner[0] + (uppercorner[0] - lowercorner[0])/2.0; //The x-midpoint of the node
+  y_halfway = lowercorner[1] + (uppercorner[1] - lowercorner[1])/2.0; //The y-midpoint of the node
+  //z_halfway = lowercorner[2] + (uppercorner[2] - lowercorner[2])/2.0;  //The z-midpoint of the node (currently off for development)
+
+  /*Initial all the pointers to children to be NULL; we haven't had any children yet!*/
   for(int i=0; i<numchildren; i++)
     {
       children[i] = NULL;
     }
 }
-  
+
+//Create a child node
 Node *Node::BearChild(quad_octant_name quad_octant)
 {
-  //printf("   Trying to figure out bounds of new quadrant, currently I have %e  %e  %e  %e  %e  %e\n",lowercorner[0],lowercorner[1],uppercorner[0],uppercorner[1],x_halfway,y_halfway);
-  if(numdimen == 2)
+  if(numdimen == 2) //If we have two dimensions
     {
-      double lowercorner_temp[2];
-      double uppercorner_temp[2];
+      double lowercorner_temp[2]; //Stores what will be the lower corner of the child node being created
+      double uppercorner_temp[2]; //Stores what will be the upper corner of the child node being created
       switch(quad_octant)
         {
-        case NW:
+        case NW: //If the child node is a NW node, set the corners to these values
           lowercorner_temp[0] = lowercorner[0];
           lowercorner_temp[1] = y_halfway;
           uppercorner_temp[0] = x_halfway;
           uppercorner_temp[1] = uppercorner[1];
           break;
-        case NE:
+        case NE: //If the child node is a NE node, set the corners to these values
           lowercorner_temp[0] = x_halfway;
           lowercorner_temp[1] = y_halfway;
           uppercorner_temp[0] = uppercorner[0];
           uppercorner_temp[1] = uppercorner[1];
           break;
-        case SE:
+        case SE: //If the child node is a SE node, set the corners to these values
           lowercorner_temp[0] = x_halfway;
           lowercorner_temp[1] = lowercorner[1];
           uppercorner_temp[0] = uppercorner[0];
           uppercorner_temp[1] = y_halfway;
           break;
-        case SW:
+        case SW: //If the child node is a SW node, set the corners to these values
           lowercorner_temp[0] = lowercorner[0];
           lowercorner_temp[1] = lowercorner[1];
           uppercorner_temp[0] = x_halfway;
@@ -62,7 +63,7 @@ Node *Node::BearChild(quad_octant_name quad_octant)
         case lNE:
         case lSW:
         case lSE:
-          printf("Shouldn't be here\n");
+          printf("Shouldn't be here\n"); //If two dimensions, should have l/u octants
           break;
         case ROOT_:
           printf("Seriously?!?\n");
@@ -71,15 +72,17 @@ Node *Node::BearChild(quad_octant_name quad_octant)
           printf("I got an erroneous quadrant value...\n");
           break;
         }
-      printf("About to create new node with   %e    %e    %e    %e\n",lowercorner_temp[0],lowercorner_temp[1],uppercorner_temp[0],uppercorner_temp[1]);
+      //Create the new child node and return pointer to this node
       return new Node(quad_octant, lowercorner_temp, uppercorner_temp, EMPTY);
     }
 }
 
+//Figure out which quadrant/octant a particle will belong to
 quad_octant_name Node::FigureQuadOctant(Particle particle)
 {
-  if(numdimen == 2)
+  if(numdimen == 2) //If the number of dimensions is 2
     {
+      //If the particle is outside the boundaries of the box
       if(particle.x < lowercorner[0] || particle.x > uppercorner[0] || particle.y < lowercorner[1] || particle.y > uppercorner[1])
           {
             printf("Particle is outside the boundaries of the node, don't know what to do with it.\n");
@@ -88,111 +91,98 @@ quad_octant_name Node::FigureQuadOctant(Particle particle)
       
       if(particle.x < x_halfway)
         {
-          if(particle.y < y_halfway)
+          if(particle.y < y_halfway) //It's in the SW position
             {
               return SW;
             }
-          else
+          else  //It's in the NW position
             {
               return NW;
             }
         }
       else
         {
-          if(particle.y < y_halfway)
+          if(particle.y < y_halfway)  //It's in the SE position
             {
               return SE;
             }
-          else
+          else  //It's in the NE position
             {
               return NE;
             }
         }
     }
-  else if(numdimen == 3)
+  else if(numdimen == 3)  //If the number of dimensions is 3
     {
       printf("Not programmed yet, 3 dimensions for FigureQuadOctant");
       return ERROR_;
     }
-  else
+  else  //Don't know what to do with this number of dimensions
     {
       printf("Don't know what to do with this number of dimensions: %d\n",numdimen);
       return ERROR_;
     }
 }
 
+//Figure out what to do with the particle that has been passed to me
 void Node::FigureParticle(Particle_vector_element_pointer passed_particle)
 {
-  //printf("I am a node, type %d, quadrant %d, figuring what to do with a particle.\n",whatami,quad_octant_);
-  if(whatami == LEAF) printf("        my current particle is at  %e  %e\n",particle_leaf->x,particle_leaf->y);
-
-
-  if(whatami == PARENT)
+  if(whatami == PARENT) //If I already have children nodes
     {
       quad_octant_name qo;
-      qo = FigureQuadOctant(*passed_particle);
-      //printf("       I am a parent, passed particle will go to quadrant %d\n",qo);
-      
-      if(children[qo] == NULL)
+      qo = FigureQuadOctant(*passed_particle); //Figure the quadrant the passed particle belongs in
+        
+      if(children[qo] == NULL) //If this quadrant has no child yet
         {
-          children[qo] = BearChild(qo);
+          children[qo] = BearChild(qo);  //Create the child node
         }
-      UpdateCOM(*passed_particle);
-      children[qo]->FigureParticle(passed_particle);
+      UpdateCOM(*passed_particle); //Update the center of mass
+      children[qo]->FigureParticle(passed_particle); //Pass the particle to this child node
     }  
-  else if(whatami == LEAF)
+  else if(whatami == LEAF) //If I have a particle but no children
     {
       quad_octant_name qo;
-      qo = FigureQuadOctant(*passed_particle);
-      printf("       I am a leaf, passed particle will go to quadrant %d\n",qo);
-      printf("        my current particle is at  %e  %e\n",particle_leaf->x,particle_leaf->y);
-      printf("         passed particle is at   %e  %e\n",passed_particle->x,passed_particle->y);
+      qo = FigureQuadOctant(*passed_particle);  //Figure the quadrant the passed particle belongs in
       
-      UpdateCOM(*passed_particle);
+      UpdateCOM(*passed_particle); //Update center of mass
       
-      children[qo] = BearChild(qo);
-      children[qo]->FigureParticle(passed_particle);
+      children[qo] = BearChild(qo);  //Create the child node
+      children[qo]->FigureParticle(passed_particle);  //Pass the particle to the child node
       
       quad_octant_name qo2;
-      printf("        figuring what to do with particle I already have\n");
-      qo2 = FigureQuadOctant(*particle_leaf);
-      printf("        particle I already have will go to quadrant %d\n",qo2);
-      printf("         that particle is at   %e  %e\n",particle_leaf->x,particle_leaf->y);
+      qo2 = FigureQuadOctant(*particle_leaf);  //Figure quadrant of particle already contained in this leaf node
 
       if(qo == qo2)
         {
-          printf("            qo is equal to qo2\n");
-          children[qo]->FigureParticle(particle_leaf);
+          children[qo]->FigureParticle(particle_leaf);  //Pass the particle to the child node, which already exists
         }
       else
         {
-          children[qo2] = BearChild(qo2);
-          children[qo2]->FigureParticle(particle_leaf);
+          children[qo2] = BearChild(qo2);  //Create the child node
+          children[qo2]->FigureParticle(particle_leaf); //Pass the particle (already contained in this leaf) to the child node
         }
-      particle_leaf = NULL;
-      whatami = PARENT;
+      particle_leaf = NULL;  //Remove this node's attachment to a specific particle
+      whatami = PARENT;  //This node is now a parent node
     }
-  else if(whatami == EMPTY)
+  else if(whatami == EMPTY) //If the node is EMPTY
     {
-      printf("    I am an empty node\n");
-      mass = passed_particle->mass;
-      com[0] = passed_particle->x;
-      com[1] = passed_particle->y;
+      mass = passed_particle->mass; //Update node mass to be particle mass
+      com[0] = passed_particle->x;  //Update center of mass position to be particle position
+      com[1] = passed_particle->y;  //Update center of mass position to be particle position
       /*if(numdimen == 3)
         {
-        com[2] = passed_particle.z;
+        com[2] = passed_particle.z;  //Update center of mass position to be particle position
         }*/
-      particle_leaf = passed_particle;
-      whatami = LEAF;
-      printf("    I am no longer empty!  Got a particle with mass %e\n",mass);
+      particle_leaf = passed_particle;  //Attach this particle to this node
+      whatami = LEAF;  //Node is now a LEAF node
     }  
   else if(whatami == ROOT)
     {
       printf("ERROR: I'm dealing with a ROOT node?  Here?  Whaaaat?\n");
     }
-  //printf("       Done figuring out what to do with particle, I am a %d\n",whatami);
 }
 
+//Update center of mass of all particles contained in this node and its children
 void Node::UpdateCOM(Particle passed_particle)
 {
   double weighted_x = mass*com[0] + passed_particle.mass * passed_particle.x;
@@ -207,8 +197,8 @@ void Node::UpdateCOM(Particle passed_particle)
   mass += passed_particle.mass;
 }
 
-Node::~Node()
-  
+//Destructor
+Node::~Node()  
 {
   //Delete children nodes
   for(int i=0; i<numchildren; i++)
