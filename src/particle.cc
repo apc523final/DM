@@ -1,5 +1,6 @@
 #include "particle.h"
 
+//Create an empty particle
 Particle::Particle()
   : mass(0.),
     x(0.),
@@ -8,6 +9,7 @@ Particle::Particle()
     ay(0.)
 {}
 
+//Create a particle with these specific mass, x, and y values
 Particle::Particle(double mass, double x, double y)
   : mass(mass),
     x(x),
@@ -16,5 +18,6 @@ Particle::Particle(double mass, double x, double y)
     ay(0.)
 {}
 
+//Destructor
 Particle::~Particle()
 {}
