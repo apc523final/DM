@@ -7,6 +7,7 @@
 #define INTEGRATOR_H_
 
 #include "particle.h"
+#include "node.h"
 
 /**
  * Abstract integrator class.
@@ -14,7 +15,7 @@
 class Integrator {
  public:
   virtual ~Integrator() {}
-  virtual int step(double t, Particle_vector &particles) = 0;
+  virtual int step(double t, Particle_vector &particles, Node_vector &nodes) = 0;
 };
 
 
