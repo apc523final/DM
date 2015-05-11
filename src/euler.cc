@@ -26,10 +26,10 @@ int Euler::step(double t, Particles &particles) {
   for (auto &p : particles) {
     p.x  += dt_ * p.vx;
     p.y  += dt_ * p.vy;
-    p.z  += dt_ * p.vz;
+    // p.z  += dt_ * p.vz;
     p.vx += dt_ * p.ax;
     p.vy += dt_ * p.ay;
-    p.vz += dt_ * p.az;
+    // p.vz += dt_ * p.az;
   }
   return 0;
 }
