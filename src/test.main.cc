@@ -32,7 +32,7 @@ void checkerror_int(const int value_to_check, const int value_to_check_against, 
 void checknotnum_double(const double value_to_check, const double value_to_check_against, const char *error_name, int particle_num=-1)
 {
   double epsilon = 1.e-15;
-  if( fabs(value_to_check - value_to_check_against) > epsilon)
+  if( fabs(value_to_check - value_to_check_against) < epsilon)
     {
       if(particle_num == -1) printf("ERROR DETECTED!!!!  Error name: %s\n",error_name);
       else  printf("ERROR DETECTED!!!!  Error name: %s, loop number:%d\n",error_name,particle_num);
@@ -130,7 +130,8 @@ int main()
   Node rn = root;
   initnodes.push_back(rn);
   f.calculateforce(initnodes, particles);
-  checknotnum_double(particle5.ax, 0, 'particleacciszero');
+  double accx = particle5.ax;
+  checknotnum_double(accx, 0, "Acc is zero");
 
   
   /*if(!(root.children[NW]->children[SW] == NULL))
