@@ -24,12 +24,10 @@ Force::~Force() {
 //Function that calculates force
 void Force::updateacceleration(Node_vector &n, Particle_vector &p){
 	
-	
-	
 	//Set acceleration to 0
   	for (auto &a : p) {
     		a.ax = 0.;
-			a.ay = 0.;
+                a.ay = 0.;
     		// a.az = 0.;
 	 }
 
