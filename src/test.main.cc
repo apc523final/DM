@@ -2,6 +2,7 @@
 #include "rootnode.h"
 #include "particle.h"
 #include <cmath>
+#include "force.h"
 
 int numerrors;
 
@@ -27,6 +28,19 @@ void checkerror_int(const int value_to_check, const int value_to_check_against, 
       numerrors++;
     }
 }
+
+void checknotnum_double(const double value_to_check, const double value_to_check_against, const char *error_name, int particle_num=-1)
+{
+  double epsilon = 1.e-15;
+  if( fabs(value_to_check - value_to_check_against) > epsilon)
+    {
+      if(particle_num == -1) printf("ERROR DETECTED!!!!  Error name: %s\n",error_name);
+      else  printf("ERROR DETECTED!!!!  Error name: %s, loop number:%d\n",error_name,particle_num);
+      printf("You got %e, compared against %e\n",value_to_check,value_to_check_against);
+      numerrors++;
+    }
+}
+
 
 int main()
 {
@@ -109,6 +123,14 @@ int main()
   checkerror_int(root.children[NW]->whatami,PARENT,"Parent Error Initial");
   checkerror_double(root.children[NW]->children[NW]->mass,mass2,"Parent passing particle correctly");
   checkerror_double(root.children[NW]->children[NE]->mass,1.0,"Parent passing existing particle correctly");
+
+  //check force
+  Force f;
+  Node_vector initnodes;
+  Node rn = root;
+  initnodes.push_back(rn);
+  f.calculateforce(initnodes, particles);
+  checknotnum_double(particle5.ax, 0, 'particleacciszero');
 
   
   /*if(!(root.children[NW]->children[SW] == NULL))
