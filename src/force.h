@@ -12,8 +12,7 @@
 
 /*Define functions used in Force calculation*/
 
-float calculateforce(Particle p1);
-float findseparation(Particle p1, Particle p2);
+float calculateforce(Node_vector &nodes, Particle_vector &particles);
 
 
 
