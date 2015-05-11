@@ -1,5 +1,5 @@
 #include "node.h"
-#include "rootnode.h"
+//#include "rootnode.h"
 #include "particle.h"
 #include <cmath>
 #include "force.h"
@@ -62,7 +62,7 @@ int main()
 
 
 
-  RootNode root(lowercorner,uppercorner);
+  Node root(lowercorner,uppercorner,ROOT);
   //printf("Root limits: %lf %lf %lf %lf\n",root.lowercorner[0], root.lowercorner[1], root.uppercorner[0], root.uppercorner[1]);
   //printf("NW corner: %lf %lf %lf %lf\n",root.children[NW]->lowercorner[0],root.children[NW]->lowercorner[1],root.children[NW]->uppercorner[0],root.children[NE]->uppercorner[1]);
   //printf("NE corner: %lf %lf %lf %lf\n",root.children[NE]->lowercorner[0],root.children[NE]->lowercorner[1],root.children[NE]->uppercorner[0],root.children[NE]->uppercorner[1]);
@@ -96,7 +96,7 @@ int main()
 
   for(int i=0; i<particles.size(); i++)
     {
-      root.PassParticle(&particles[i]);
+      root.FigureParticle(&particles[i]);
     }
 
   for(int i=0; i<4; i++)
@@ -118,7 +118,7 @@ int main()
   particles.push_back(particle5);
   //printf("%e   %e\n",particle5.x,particle5.y);
   
-  root.PassParticle(&particles[4]);
+  root.FigureParticle(&particles[4]);
   
   checkerror_int(root.children[NW]->whatami,PARENT,"Parent Error Initial");
   checkerror_double(root.children[NW]->children[NW]->mass,mass2,"Parent passing particle correctly");
