@@ -22,17 +22,20 @@ Force::~Force() {
 }
 
 void Force::main(Particle_vector &particles){
-	//Set force equal to zero again	
-	float force = 0;
-	//Find total number of particles
-	int NumParticles = particles.size();
-	if (gravity_) {
-    		calculateforce(particles);
-	 }
+	calculateforce(particles)
 }
 
 //Function that calculates force
 void Force::calculateforce(Particle_vector &p){
+	//Find total number of particles
+	int NumParticles = particles.size();
+	
+	//Set acceleration to 0
+	
+	//Loop PROPERLY over particles and add to acceleration
+	//in EACH direction.
+	
+	/*
 	if (NumParticles == 1){
 		float r = findseparation(p1, p2)
 		force = -G*p1.mass*p2.mass/pow(r,3) //Make a separate function for this?
@@ -50,6 +53,7 @@ void Force::calculateforce(Particle_vector &p){
 		}
 	}
 	return force;
+	*/
 
 }
 //Function that finds the separation between two particles
