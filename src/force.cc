@@ -14,17 +14,18 @@ ALSO: FIX THE DANG HEADER FILE!
 
 //Force Constructor
 Force::Force(int gravity/*=1*/)
-  : gravity_(gravity) {
-}
+  : gravity_(gravity)
+{}
 
 //Force Destructor
-Force::~Force() {
-}
+Force::~Force()
+{}
+
 
 //Function that calculates force
-void Force::updateacceleration(Node_vector &n, Particle_vector &p){
-	
-	//Set acceleration to 0
+void Force::updateacceleration(Node_vector &n, Particle_vector &p)
+{
+      	//Set acceleration to 0
   	for (auto &a : p) {
     		a.ax = 0.;
                 a.ay = 0.;
@@ -80,13 +81,13 @@ void Force::updateacceleration(Node_vector &n, Particle_vector &p){
           
 }
 
-double calculateseparation(Particle &part, Node &nod){
+
+
+double Force::calculateseparation(Particle &part, Node &nod)
+{
     double jx, jy;
     jx = nod.com[0];
     jy = nod.com[1];
     return sqrt(pow((jx-part.x), 2) +
               pow((jy-part.y), 2));
 }
-
-
-
