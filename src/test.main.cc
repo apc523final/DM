@@ -149,12 +149,15 @@ int main()
   checkerror_double(root.children[NW]->children[NE]->mass,1.0,"Parent passing existing particle correctly");
 
   //check force
-  Force f;
   Node_vector initnodes;
   initnodes.push_back(root);
+<<<<<<< HEAD
   printf("here\n");
   f.updateacceleration(initnodes, particles);
   printf("there\n");
+=======
+  force.updateacceleration(initnodes, particles);
+>>>>>>> 920324aad45390577204f1a70adf7cf3c87269bf
   double accx = particle5.ax;
   checknotnum_double(accx, 0, "Acceleration is zero");
 
