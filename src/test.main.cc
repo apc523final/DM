@@ -151,13 +151,9 @@ int main()
   //check force
   Node_vector initnodes;
   initnodes.push_back(root);
-<<<<<<< HEAD
   printf("here\n");
-  f.updateacceleration(initnodes, particles);
-  printf("there\n");
-=======
   force.updateacceleration(initnodes, particles);
->>>>>>> 920324aad45390577204f1a70adf7cf3c87269bf
+  printf("there\n");
   double accx = particle5.ax;
   checknotnum_double(accx, 0, "Acceleration is zero");
 
