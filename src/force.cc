@@ -4,41 +4,56 @@
 #include "particle.h"
 #include "force.h"
 
+const int G = 6.67E-11 //Gravitational constant in m^3/kg*s^2
 
-float main(Particle p1){
+/*NOTE TO FUTURE KRISTINA: USE: https://github.com/Nbodypp/HOW_final/blob/master/src/force_direct.cc
+NEED TO FIX calculateforce function!
+ALSO: FIX THE DANG HEADER FILE!
+
+*/
+
+//Force Constructor
+Force::Force(int gravity/*=1*/)
+  : gravity_(gravity) {
+}
+
+//Force Destructor
+Force::~Force() {
+}
+
+void Force::main(Particle_vector &particles){
 	//Set force equal to zero again	
 	float force = 0;
-	Particle_vector particles;
-	RootNode root;
+	//Find total number of particles
 	int NumParticles = particles.size();
-
-
-	/*Loop over all particles*/
-	for(int i =0; i<NumParticles; i++){
-		Particle p1 = particles[i]
-		force += root.calculateforce(Particle p1) //calculate force
-	}
-	return force //return force
+	if (gravity_) {
+    		calculateforce(particles);
+	 }
 }
 
 //Function that calculates force
-float calculateforce(Particle p1){
-	if NumParticles ==
-		//force = F_G of particles, using findseparation
-	//else
-		//r=distance from nodes center of mass to TargetParticle
-		//d=height of node
-		//if (d/r < theta)
+float calculateforce(Particle_vector &p){
+	if (NumParticles == 1){
+		float r = findseparation(p1, p2)
+		force = -G*p1.mass*p2.mass/pow(r,3) //Make a separate function for this?
+	}
+	else{
+		Particle pm = root.com;
+		float r = findseparation(p1, pm)
+		float d = root.uppdercorner()-root.lowercorner()
+		if (d/r < theta){
 			//force = F_g of particel and center of mass of node
-		//else
+		}
+		else{
 			//for all child nodes n
 				//force += node.calculateforce(particle)
-
-
+		}
+	}
+	return force;
 
 }
 //Function that finds the separation between two particles
-float findseparation(Particle p1, Paricle p2){
-	separation = sqrt((p1.x - p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y));
+float findseparation(Particle p1, Particle p2){
+	separation = sqrt((p1.x - p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y) + (p1.z-p2.z)*(p1.z-p2.z));
 	return separation;
 }
