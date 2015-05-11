@@ -81,8 +81,6 @@ void Force::updateacceleration(Node_vector &n, Particle_vector &p)
           
 }
 
-
-
 double Force::calculateseparation(Particle &part, Node &nod)
 {
     double jx, jy;

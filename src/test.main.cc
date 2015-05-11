@@ -139,10 +139,8 @@ int main()
 
   double mass2 = 2.0;
   Particle particle5;
-  printf("    before:  x:%e   y:%e   Mass: %e\n",root.children[NW]->particle_leaf->x,root.children[NW]->particle_leaf->y,root.children[NW]->particle_leaf->mass);
   particle5 = Particle(mass2,-1.5,1.5);
   particles.push_back(particle5);
-  //printf("%e   %e\n",particle5.x,particle5.y);
   
   root.FigureParticle(&particles[4]);
   
@@ -154,7 +152,9 @@ int main()
   Force f;
   Node_vector initnodes;
   initnodes.push_back(root);
+  printf("here\n");
   f.updateacceleration(initnodes, particles);
+  printf("there\n");
   double accx = particle5.ax;
   checknotnum_double(accx, 0, "Acceleration is zero");
 

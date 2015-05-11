@@ -1,6 +1,6 @@
 INCDIR=
 LIBDIR=
-CFLAGS=-Wall -O3 -std=c++0x $(INCDIR) $(LIBDIR)
+CFLAGS=-Wall -O3 -g -std=c++0x $(INCDIR) $(LIBDIR)
 CXX=g++
 
 .PHONY: clean
