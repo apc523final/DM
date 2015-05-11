@@ -1,9 +1,13 @@
-#include "node.h"
-//#include "rootnode.h"
-#include "particle.h"
 #include <cmath>
 #include <string>
+#include <stdlib.h>
+#include <stdio.h>
+#include "node.h"
+#include "particle.h"
+#include "integrator.h"
+#include "euler.h"
 #include "force.h"
+
 
 int numerrors;
 
@@ -47,6 +51,8 @@ int main()
 {
   //numchildren = 4;
   numerrors = 0;
+
+  double dt = .1;
   
   Particle_vector particles;
   particles.push_back(Particle(1.0,-1.0,1.0));
@@ -67,15 +73,15 @@ int main()
 
   Integrator *integrator = NULL;
   if (integrator_name.compare("euler") == 0) {
-    std::cerr << "#Setting up an euler integrator" << std::endl;
+    printf("#Setting up an euler integrator\n");
     integrator = new Euler(dt, force);
-  } else if (integrator_name.compare("leapfrog") == 0) {
+  } /*else if (integrator_name.compare("leapfrog") == 0) {
     std::cerr << "#Setting up a leapfrog integrator" << std::endl;
     integrator = new Leapfrog(dt, force);
   } else if (integrator_name.compare("rk4") == 0) {
     std::cerr << "#Setting up a runge-kutta integrator" << std::endl;
     integrator = new RungeKutta4(dt, force);
-  }
+    }*/
   if (integrator == NULL) {
     fprintf(stderr, "ERROR: integrator %s is not known\n",
             integrator_name.c_str());
