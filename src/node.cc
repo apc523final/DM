@@ -3,8 +3,8 @@
 #include "particle.h"
 
 //Creator of Node
-Node::Node(quad_octant_name quad_octant, double *lowercorner_, double *uppercorner_, Node_Type nodetype)
-  :  quad_octant_(quad_octant), //Set what quadrant/octant of the parent node this node belongs to.
+Node::Node(double *lowercorner_, double *uppercorner_, Node_Type nodetype)
+  :  //quad_octant_(quad_octant), //Set what quadrant/octant of the parent node this node belongs to.
      lowercorntemp(lowercorner_), //Temporary pointer used to pass the lower corner values to the node
      uppercorntemp(uppercorner_), //Temporary pointer used to pass the upper corner values to the node
      whatami(nodetype) //What type of node is the node: PARENT, LEAF, EMPTY, ROOT
@@ -19,10 +19,22 @@ Node::Node(quad_octant_name quad_octant, double *lowercorner_, double *uppercorn
   y_halfway = lowercorner[1] + (uppercorner[1] - lowercorner[1])/2.0; //The y-midpoint of the node
   //z_halfway = lowercorner[2] + (uppercorner[2] - lowercorner[2])/2.0;  //The z-midpoint of the node (currently off for development)
 
-  /*Initial all the pointers to children to be NULL; we haven't had any children yet!*/
-  for(int i=0; i<numchildren; i++)
+  /*If this is the ROOT node, start out with some children already*/
+  if(nodetype == ROOT)
     {
-      children[i] = NULL;
+      children[NW] = BearChild(NW); //Create the NW child
+      children[NE] = BearChild(NE); //Create the NE child
+      children[SE] = BearChild(SE); //Create the SE child
+      children[SW] = BearChild(SW); //Create the SW child
+    }
+  
+  /*If not root node, nitialize all the pointers to children to be NULL; we haven't had any children yet!*/
+  else
+    {
+      for(int i=0; i<numchildren; i++)
+        {
+          children[i] = NULL;
+        }
     }
 }
 
@@ -73,7 +85,7 @@ Node *Node::BearChild(quad_octant_name quad_octant)
           break;
         }
       //Create the new child node and return pointer to this node
-      return new Node(quad_octant, lowercorner_temp, uppercorner_temp, EMPTY);
+      return new Node(lowercorner_temp, uppercorner_temp, EMPTY);
     }
 }
 
@@ -127,11 +139,18 @@ quad_octant_name Node::FigureQuadOctant(Particle particle)
 //Figure out what to do with the particle that has been passed to me
 void Node::FigureParticle(Particle_vector_element_pointer passed_particle)
 {
-  if(whatami == PARENT) //If I already have children nodes
+  if(whatami == ROOT)  //Should be a root node, so enter this part of the statement
+    {
+      quad_octant_name q_o;  //quadrant/octant for the particle being passed
+      q_o = FigureQuadOctant(*passed_particle);  //Figure out which quadrant/octant the particle belongs to
+      children[q_o]->FigureParticle(passed_particle);  //Pass particle to that quadrant/octant
+    }
+  
+  else if(whatami == PARENT) //If I already have children nodes
     {
       quad_octant_name qo;
       qo = FigureQuadOctant(*passed_particle); //Figure the quadrant the passed particle belongs in
-        
+      
       if(children[qo] == NULL) //If this quadrant has no child yet
         {
           children[qo] = BearChild(qo);  //Create the child node

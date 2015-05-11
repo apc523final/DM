@@ -11,10 +11,10 @@
 /*The Node class*/
 class Node {
  public:
-  Node(quad_octant_name quad_octant, double *lowercorner_, double *uppercorner_, Node_Type nodetype); //constructor
+  Node(double *lowercorner_, double *uppercorner_, Node_Type nodetype); //constructor
   ~Node(); //destructor
 
-  quad_octant_name quad_octant_; //What quadrant/octant the node is in its parent node
+  //quad_octant_name quad_octant_; //What quadrant/octant the node is in its parent node
   double *lowercorntemp;  //Temporary pointer used to pass the lower corner values to the node
   double *uppercorntemp;  //Temporary pointer used to pass the upper corner values to the node
   Node_Type whatami;  //What type of node is the node: PARENT, LEAF, EMPTY, ROOT

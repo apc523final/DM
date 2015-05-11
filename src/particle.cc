@@ -1,4 +1,5 @@
 #include "particle.h"
+#include <cmath>
 
 //Create an empty particle
 Particle::Particle()
