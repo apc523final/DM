@@ -14,7 +14,7 @@
 class Integrator {
  public:
   virtual ~Integrator() {}
-  virtual int step(double t, Particles &particles) = 0;
+  virtual int step(double t, Particle_vector &particles) = 0;
 };
 
 

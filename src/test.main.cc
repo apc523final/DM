@@ -153,7 +153,7 @@ int main()
   //check force
   Node_vector initnodes;
   initnodes.push_back(root);
-  force.calculateforce(initnodes, particles);
+  force.updateacceleration(initnodes, particles);
   double accx = particle5.ax;
   checknotnum_double(accx, 0, "Acceleration is zero");
 
