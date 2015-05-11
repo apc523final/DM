@@ -21,8 +21,8 @@ Euler::~Euler() {
 /**
  * Inegrate particles' position and velocity for one time step.
  */
-int Euler::step(double t, Particles &particles) {
-  force_.update_acceleration(particles);
+int Euler::step(double t, Particle_vector &particles) {
+  force_.updateacceleration(particles);
   for (auto &p : particles) {
     p.x  += dt_ * p.vx;
     p.y  += dt_ * p.vy;

@@ -22,7 +22,7 @@ Force::~Force() {
 }
 
 //Function that calculates force
-void Force::calculateforce(Node_vector &n, Particle_vector &p){
+void Force::updateacceleration(Node_vector &n, Particle_vector &p){
 	
 	
 	
