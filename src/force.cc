@@ -58,10 +58,9 @@ void Force::updateacceleration(Node_vector &n, Particle_vector &p)
 	      	 i->ay += jmass * day;
 	      }
 	      else{
-	      	Node_vector childs;
+	      	Node_vector_element_pointer childs;
 	      	for(int k=0; k<4; k++){
-	      	Node child = *(j->children[k]);
-	      	childs.push_back(child);
+	      	childs.push_back(j->children[k]);
 	      	}
 	      	updateacceleration(childs, p);
 	      }
