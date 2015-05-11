@@ -109,6 +109,7 @@ int main()
   checkerror_int(root.children[NW]->whatami,PARENT,"Parent Error Initial");
   checkerror_double(root.children[NW]->children[NW]->mass,mass2,"Parent passing particle correctly");
   checkerror_double(root.children[NW]->children[NE]->mass,1.0,"Parent passing existing particle correctly");
+
   
   /*if(!(root.children[NW]->children[SW] == NULL))
     {

@@ -22,7 +22,7 @@ Force::~Force() {
 }
 
 //Function that calculates force
-void Force::calculateforce(Node *n, Particle_vector &p){
+void Force::calculateforce(Node_vector &n, Particle_vector &p){
 	
 	
 	
@@ -59,26 +59,26 @@ void Force::calculateforce(Node *n, Particle_vector &p){
 	      	 i->ay += jmass * day;
 	      }
 	      else{
-	      	Node chilluns = j->children;
-	      	Node_vector
-
-	      	calculateforce(&child, &p)
-	      	break;
+	      	Node_vector childs;
+	      	for(int k=0; k<4; k++){
+	      	Node child = *(j->children[k]);
+	      	childs.push_back(child);
+	      	}
+	      	calculateforce(childs, p);
 	      }
-	      jx = j->com[0];
-	      jy = j->com[1];
-	      jmass = j->mass;
+	    // jx = j->com[0];
+	    // jy = j->com[1];
+	    // jmass = j->mass;
 
-	      dax = (jx - i->x) / pow(r, 3);
-	      day = (jy - i->y) / pow(r, 3);
+	    // dax = (jx - i->x) / pow(r, 3);
+	    // day = (jy - i->y) / pow(r, 3);
 	      
-	      i->ax += jmass * dax;
-	      i->ay += jmass * day;
-	    }
-	    i->ax *= G;
-	    i->ay *= G;
-	    // i->az *= G;
-	  }
+	    // i->ax += jmass * dax;
+	    // i->ay += jmass * day;
+		}
+	i->ax *= G;
+	i->ay *= G;
+}
 
 }
 
