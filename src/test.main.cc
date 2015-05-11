@@ -2,6 +2,7 @@
 //#include "rootnode.h"
 #include "particle.h"
 #include <cmath>
+#include <string>
 #include "force.h"
 
 int numerrors;
@@ -60,6 +61,25 @@ int main()
   uppercorner[0]=2.0;
   uppercorner[1]=2.0;
 
+  Force force;
+  
+  const std::string integrator_name = "euler";
+
+  Integrator *integrator = NULL;
+  if (integrator_name.compare("euler") == 0) {
+    std::cerr << "#Setting up an euler integrator" << std::endl;
+    integrator = new Euler(dt, force);
+  } else if (integrator_name.compare("leapfrog") == 0) {
+    std::cerr << "#Setting up a leapfrog integrator" << std::endl;
+    integrator = new Leapfrog(dt, force);
+  } else if (integrator_name.compare("rk4") == 0) {
+    std::cerr << "#Setting up a runge-kutta integrator" << std::endl;
+    integrator = new RungeKutta4(dt, force);
+  }
+  if (integrator == NULL) {
+    fprintf(stderr, "ERROR: integrator %s is not known\n",
+            integrator_name.c_str());
+  }
 
 
   Node root(lowercorner,uppercorner,ROOT);
@@ -125,25 +145,12 @@ int main()
   checkerror_double(root.children[NW]->children[NE]->mass,1.0,"Parent passing existing particle correctly");
 
   //check force
-  Force f;
   Node_vector initnodes;
-  Node rn = root;
-  initnodes.push_back(rn);
-  f.calculateforce(initnodes, particles);
+  initnodes.push_back(root);
+  force.calculateforce(initnodes, particles);
   double accx = particle5.ax;
-  checknotnum_double(accx, 0, "Acc is zero");
+  checknotnum_double(accx, 0, "Acceleration is zero");
 
-  
-  /*if(!(root.children[NW]->children[SW] == NULL))
-    {
-      printf("ERROR DETECTED!!!! A node which shouldn't exist does!  The SW one\n");
-      numerrors++;
-    }
-    if(!(root.children[NW]->children[SE] == NULL))
-    {
-      printf("ERROR DETECTED!!!! A node which shouldn't exist does!  The SE one\n");
-      numerrors++;
-      }*/  //Creating a Segmentation Fault 11
   
   printf("*********\n Total number of errors: %d\n********\n",numerrors);
   return 0;

@@ -69,17 +69,17 @@ void Force::calculateforce(Node_vector &n, Particle_vector &p){
 	    // jx = j->com[0];
 	    // jy = j->com[1];
 	    // jmass = j->mass;
-
+              
 	    // dax = (jx - i->x) / pow(r, 3);
 	    // day = (jy - i->y) / pow(r, 3);
 	      
 	    // i->ax += jmass * dax;
 	    // i->ay += jmass * day;
-		}
-	i->ax *= G;
-	i->ay *= G;
-}
-
+            }
+            i->ax *= G;
+            i->ay *= G;
+          }
+          
 }
 
 double calculateseparation(Particle &part, Node &nod){
