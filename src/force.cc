@@ -22,7 +22,7 @@ Force::~Force() {
 }
 
 void Force::main(Node_vector &nodes, Particle_vector &particles){
-	calculateforce(nodes, particles)
+	calculateforce(nodes, particles);
 }
 
 //Function that calculates force
@@ -49,7 +49,7 @@ void Force::calculateforce(Node_vector &n, Particle_vector &p){
 	    // daz = 0.;
 	    for (auto j = n.begin(); j != n.end(); ++j) {
 	      r = i->d(*j);
-	      l = j.uppercorner-j.lowercorner
+	      l = j.uppercorner-j.lowercorner;
 	      if (l/r<theta){
 	      	continue 
 	      }
@@ -58,9 +58,9 @@ void Force::calculateforce(Node_vector &n, Particle_vector &p){
 	      	calculateforce(&child, &p)
 	      	break
 	      }
-	      j->x = j.com[0]
-	      j->y = j.com[1]
-	      j->mass = j.mass
+	      j->x = j.com[0];
+	      j->y = j.com[1];
+	      j->mass = j.mass;
 
 	      dax = (j->x - i->x) / pow(r, 3);
 	      day = (j->y - i->y) / pow(r, 3);
