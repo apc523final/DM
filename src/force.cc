@@ -56,8 +56,8 @@ void Force::calculateforce(Particle_vector &p){
 	*/
 
 }
-//Function that finds the separation between two particles
-float find3Dseparation(Particle p1, Particle p2){
-	separation = sqrt((p1.x - p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y) + (p1.z-p2.z)*(p1.z-p2.z));
-	return separation;
-}
+//Function that finds the separation between two particles - DO NOT NEED.
+// float find3Dseparation(Particle p1, Particle p2){
+// 	separation = sqrt((p1.x - p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y) + (p1.z-p2.z)*(p1.z-p2.z));
+// 	return separation;
+// }
