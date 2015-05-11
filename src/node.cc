@@ -195,10 +195,6 @@ void Node::FigureParticle(Particle_vector_element_pointer passed_particle)
       particle_leaf = passed_particle;  //Attach this particle to this node
       whatami = LEAF;  //Node is now a LEAF node
     }  
-  else if(whatami == ROOT)
-    {
-      printf("ERROR: I'm dealing with a ROOT node?  Here?  Whaaaat?\n");
-    }
 }
 
 //Update center of mass of all particles contained in this node and its children
