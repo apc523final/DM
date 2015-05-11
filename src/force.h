@@ -12,9 +12,19 @@
 
 /*Define functions used in Force calculation*/
 
-float calculateforce(Node_vector &nodes, Particle_vector &particles);
 
 
+class Force {
+ public:
+  Force(int gravity=1);
+  ~Force();
+
+  void calculateforce(Node_vector &nodes, Particle_vector &particles);
+  double calculateseparation(Particle &p, Node &n);
+
+ private:
+  int gravity_;
+};
 
 
 #endif //FORCE_H_

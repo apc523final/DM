@@ -4,8 +4,8 @@
 #include "particle.h"
 #include "force.h"
 
-const int G = 6.67E-11 //Gravitational constant in m^3/kg*s^2
-const float theta = 1 //Parameter for deciding when to calculate using COM or going to children nodes
+const double G = 6.67E-11; //Gravitational constant in m^3/kg*s^2
+const float theta = 1; //Parameter for deciding when to calculate using COM or going to children nodes
 
 /*NOTE TO FUTURE KRISTINA: USE: https://github.com/Nbodypp/HOW_final/blob/master/src/force_direct.cc
 NEED TO FIX calculateforce function!
@@ -21,12 +21,8 @@ Force::Force(int gravity/*=1*/)
 Force::~Force() {
 }
 
-void Force::main(Node_vector &nodes, Particle_vector &particles){
-	calculateforce(nodes, particles);
-}
-
 //Function that calculates force
-void Force::calculateforce(Node_vector &n, Particle_vector &p){
+void Force::calculateforce(Node *n, Particle_vector &p){
 	
 	
 	
@@ -38,40 +34,46 @@ void Force::calculateforce(Node_vector &n, Particle_vector &p){
 	 }
 
 	//Loop PROPERLY over particles and add to acceleration
-	//in EACH direction.
-	//FOLLOWING IS SEMYOUNG'S CODE
 	
-	  double r, dax, day, daz;  // temp variables
+	  double r, dax, day, daz,l, jx, jy, jmass;  // temp variables
 	  for (auto i = p.begin(); i != p.end(); ++i) {
 	    r = 0.;
 	    dax = 0.;
 	    day = 0.;
+	    l=0.;
+	    jx=0.;
+	    jy=0.;
+	    jmass=0.;
 	    // daz = 0.;
 	    for (auto j = n.begin(); j != n.end(); ++j) {
-	      r = i->d(*j);
-	      l = j.uppercorner-j.lowercorner;
+	      r = calculateseparation(*i, *j);
+	      l = j->uppercorner-j->lowercorner;
 	      if (l/r<theta){
-	      	continue 
+	      	 jx = j->com[0];
+	      	 jy = j->com[1];
+	      	 jmass = j->mass;
+
+	     	 dax = (jx - i->x) / pow(r, 3);
+	     	 day = (jy - i->y) / pow(r, 3);
+	     	 i->ax += jmass * dax;
+	      	 i->ay += jmass * day;
 	      }
 	      else{
-	      	child = n.children
-	      	calculateforce(&child, &p)
-	      	break
-	      }
-	      j->x = j.com[0];
-	      j->y = j.com[1];
-	      j->mass = j.mass;
+	      	Node chilluns = j->children;
+	      	Node_vector
 
-	      dax = (j->x - i->x) / pow(r, 3);
-	      day = (j->y - i->y) / pow(r, 3);
-	      // daz = (j->z - i->z) / pow(r, 3);
-	      // add to p_i and p_j with different signs
-	      i->ax += j->mass * dax;
-	      i->ay += j->mass * day;
-	      // i->az += j->mass * daz;
-	      j->ax -= i->mass * dax;
-	      j->ay -= i->mass * day;
-	      // j->az -= i->mass * daz;
+	      	calculateforce(&child, &p)
+	      	break;
+	      }
+	      jx = j->com[0];
+	      jy = j->com[1];
+	      jmass = j->mass;
+
+	      dax = (jx - i->x) / pow(r, 3);
+	      day = (jy - i->y) / pow(r, 3);
+	      
+	      i->ax += jmass * dax;
+	      i->ay += jmass * day;
 	    }
 	    i->ax *= G;
 	    i->ay *= G;
@@ -79,3 +81,14 @@ void Force::calculateforce(Node_vector &n, Particle_vector &p){
 	  }
 
 }
+
+double calculateseparation(Particle &part, Node &nod){
+    double jx, jy;
+    jx = nod.com[0];
+    jy = nod.com[1];
+    return sqrt(pow((jx-part.x), 2) +
+              pow((jy-part.y), 2));
+}
+
+
+

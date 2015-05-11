@@ -17,12 +17,15 @@ class Particle {
   Particle(double mass, double x, double y);
   ~Particle();
 
+
   double mass; //mass of the particle
   double x;  //x-position of the particle
   double y;  //y-position of the particle
 
   double ax;  //x-direction acceleration of the particle
   double ay;  //y-direction acceleration of the particle
+
+  double d(Particle &particle);
 };
 
 //Define a std::vector for storing many instances of Particle
