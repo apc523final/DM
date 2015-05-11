@@ -22,6 +22,9 @@ class Particle {
   double x;  //x-position of the particle
   double y;  //y-position of the particle
 
+  double vx; //x-velocity of the particle
+  double vy; //y-velocity of the particle
+
   double ax;  //x-direction acceleration of the particle
   double ay;  //y-direction acceleration of the particle
 
