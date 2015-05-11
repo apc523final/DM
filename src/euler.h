@@ -16,12 +16,12 @@
  */
 class Euler : public Integrator {
  public:
-  Euler(double dt, const Force &force);
+  Euler(double dt, Force &force);
   ~Euler();
   int step(double t, Particle_vector &particles, Node_vector &nodes);
  private:
   const double dt_;       // timestep
-  const Force &force_;    // Force model
+  Force &force_;    // Force model
 };
 
 #endif  // EULER_H_

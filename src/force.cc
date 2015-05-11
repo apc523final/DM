@@ -35,7 +35,7 @@ void Force::updateacceleration(Node_vector &n, Particle_vector &p){
 
 	//Loop PROPERLY over particles and add to acceleration
 	
-	  double r, dax, day, daz,l, jx, jy, jmass;  // temp variables
+	  double r, dax, day, l, jx, jy, jmass;  // temp variables
 	  for (auto i = p.begin(); i != p.end(); ++i) {
 	    r = 0.;
 	    dax = 0.;
@@ -64,7 +64,7 @@ void Force::updateacceleration(Node_vector &n, Particle_vector &p){
 	      	Node child = *(j->children[k]);
 	      	childs.push_back(child);
 	      	}
-	      	calculateforce(childs, p);
+	      	updateacceleration(childs, p);
 	      }
 	    // jx = j->com[0];
 	    // jy = j->com[1];

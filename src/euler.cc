@@ -11,7 +11,7 @@
  * @param dt timestep
  * @param force Force model
  */
-Euler::Euler(double dt, const Force &force)
+Euler::Euler(double dt, Force &force)
   : dt_(dt),
     force_(force) {
 }
