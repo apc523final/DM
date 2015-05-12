@@ -42,7 +42,7 @@ class NbodyCanvas(scene.SceneCanvas):
         self.scale = scale
         self.meshes = []
         self.d = data
-        self.np = self.d.shape[1]/2  # number of particles
+        self.np = self.d.shape[1]/3  # number of particles
         self.nt = self.d.shape[0]  # number of timesteps
 
         colors = list(colors)
@@ -52,7 +52,7 @@ class NbodyCanvas(scene.SceneCanvas):
             assert len(colors) == self.np, "invalid number of colors"
         # add particles for the first time
         for (x, y, z), c in\
-            zip(np.vstack(np.split(self.d[self.i],self.np))[:,:3], colors):
+            zip(np.vstack(np.split(self.d[self.i],self.np)), colors):
             m = scene.visuals.Mesh(
                 meshdata=self.mdata, color=c, shading='smooth')
             m.transform = scene.transforms.AffineTransform()
