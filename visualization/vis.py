@@ -28,14 +28,14 @@ class NbodyCanvas(scene.SceneCanvas):
         """
         scene.SceneCanvas.__init__(self, keys='interactive')
         view = self.central_widget.add_view()
-        view.set_camera('turntable', mode='ortho', up='z', distance=1.0,
-                        azimuth=30., elevation=60.)
+        view.set_camera('turntable', mode='ortho', up='z', distance=2.0,
+                        azimuth=90., elevation=60.)
         self.view = view
         # Add a 3D axis to keep us oriented
         self.axis = scene.visuals.XYZAxis(parent=view.scene)
         self.timer = app.Timer(0.1, connect=self.on_timer, start=True)
         # create mesh of a phere
-        self.mdata = create_sphere(20, 40, R)
+        self.mdata = create_sphere(200, 400, R)
 
         self.i = 0
         self.istep = istep
