@@ -80,11 +80,11 @@ int main()
       print_particles(particles, std::cout);
 
       root.Reset();
-      Node root(lowercorner,uppercorner,ROOT);
       
 
        if(z%20 == 0)
          {
+           printf("%lf   %lf\n",particles[2].x,particles[4].x);
            print_particles(particles, std::cout);
          }      
       z++;

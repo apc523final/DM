@@ -39,11 +39,12 @@ double Particle::d(Particle &p) {
  * Print formatted position of all particles
  */
 void print_particles(const Particle_vector &particles, std::ostream &f) {
+  double zero = 0.0;
   for (const auto &p : particles) {
     f << std::scientific;
     f << p.x << ' '
       << p.y << ' '
-      << '0.0'; //Print out 0 for the z position
+      << zero << ' '; //Print out 0 for the z position
   }
   f << '\n';
 }
