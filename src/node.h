@@ -34,7 +34,10 @@ class Node {
   /*Method to figure out what to do with a particle passed to it:
    Should I keep it, pass it to another child, create a child to keep it?*/
   void FigureParticle(Particle_vector_element_pointer passed_particle);
- 
+
+  /*Method to reset the tree after each timestep's calculation is done*/
+  void Reset();
+  
  private:
 
   /*Method to create a child node*/

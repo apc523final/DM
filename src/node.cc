@@ -212,6 +212,32 @@ void Node::UpdateCOM(Particle passed_particle)
   mass += passed_particle.mass;
 }
 
+void Node::Reset()
+{
+  if(whatami == ROOT)
+    {
+      for(int i=0; i<numchildren; i++)
+        {
+          delete children[i];
+        }
+      children[NW] = BearChild(NW); //Create the NW child
+      children[NE] = BearChild(NE); //Create the NE child
+      children[SE] = BearChild(SE); //Create the SE child
+      children[SW] = BearChild(SW); //Create the SW child
+
+      mass = 0.;
+      for(int i=0; i<numdimen; i++)
+        {
+          com[i] = 0.;
+        }
+    }
+  else
+    {
+      printf("Only the ROOT node can reset! Error!\n");
+    }
+}
+      
+
 //Destructor
 Node::~Node()  
 {
