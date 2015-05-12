@@ -10,6 +10,7 @@
 #include "force.h"
 #include "runge-kutta.h"
 #include "leapfrog.h"
+#include "euler_semi_implicit.h"
 
 
 int main()
@@ -48,7 +49,7 @@ int main()
   
   Force force;
   
-  const std::string integrator_name = "euler";
+  const std::string integrator_name = "euler semi";
 
   Integrator *integrator = NULL;
   if (integrator_name.compare("euler") == 0) {
@@ -63,6 +64,10 @@ int main()
     printf("#Setting up a runge-kutta integrator\n");
     integrator = new RungeKutta4(dt, force);
     }
+  else if (integrator_name.compare("euler semi") == 0) {
+    printf("#Setting up an euler-semi-implicit integrator\n");
+    integrator = new Euler_SI(dt, force);
+  }
   if (integrator == NULL) {
     fprintf(stderr, "ERROR: integrator %s is not known\n",
             integrator_name.c_str());
