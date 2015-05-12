@@ -8,12 +8,15 @@ CXX=g++
 %.o: %.cc
 	$(CXX) -c $(CFLAGS) -o $@ $^
 
-all: test basicsim
+all: test basicsim basicersim
 
 test: test.main.o node.o particle.o euler.o force.o runge-kutta.o leapfrog.o
 	$(CXX) $(CFLAGS) -o $@ $^
 
 basicsim: basicsim.o node.o particle.o euler.o force.o runge-kutta.o leapfrog.o
+	$(CXX) $(CFLAGS) -o $@ $^
+
+basicersim: basicersim.o node.o particle.o euler.o force.o runge-kutta.o leapfrog.o
 	$(CXX) $(CFLAGS) -o $@ $^
 
 clean:
