@@ -35,4 +35,6 @@ const int numdimen = 2;
      }*/
 const int numchildren = 4;
 
+const float theta = 1; //Parameter for deciding when to calculate using COM or going to children nodes
+
 #endif //GLOBAL_H_

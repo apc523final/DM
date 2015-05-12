@@ -154,7 +154,7 @@ int main()
   printf("here\n");
   force.updateacceleration(initnodes, particles);
   printf("there\n");
-  double accx = particle5.ax;
+  double accx = particles[1].ax;
   checknotnum_double(accx, 0, "Acceleration is zero");
 
   
