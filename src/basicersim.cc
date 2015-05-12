@@ -16,7 +16,7 @@ int main()
 {
   //numchildren = 4;
 
-  double dt = .0001;
+  double dt = .0003;
   int numx = 5;
   int numy = 5;
   double particlemass = 100.0;
@@ -27,12 +27,12 @@ int main()
 
   double lowercorner[2];
   double uppercorner[2];
-  lowercorner[0]=-5.0;
-  lowercorner[1]=-5.0;
-  uppercorner[0]=5.0;
-  uppercorner[1]=5.0;
+  lowercorner[0]=-1.0;
+  lowercorner[1]=-1.0;
+  uppercorner[0]=1.0;
+  uppercorner[1]=1.0;
 
-  for(int i=0; i<numx; i++)
+  /*for(int i=0; i<numx; i++)
     {
       for(int j=0; j<numy; j++)
         {
@@ -40,11 +40,15 @@ int main()
           double y = ( ((double)j+.5)/((double)(numy + 1))) * (uppercorner[1] - lowercorner[1]) + lowercorner[1];
           particles.push_back(Particle(particlemass,x,y));;
         }
-    }
+        }*/
+  particles.push_back(Particle(1.,-.5,.5));
+  particles.push_back(Particle(1.,.5,.5));
+  //particles.push_back(Particle(1.,.5,-.5));
+  //particles.push_back(Particle(1.,-.5,-.5));
   
   Force force;
   
-  const std::string integrator_name = "rk4";
+  const std::string integrator_name = "euler";
 
   Integrator *integrator = NULL;
   if (integrator_name.compare("euler") == 0) {
@@ -67,7 +71,7 @@ int main()
   Node root(lowercorner,uppercorner,ROOT);
   double t = 0.;
   int z = 0;
-  for(t=0.; t<dt*1000; t+=dt)
+  for(t=0.; t<dt*2; t+=dt)
     {
 
       for(int i=0; i<particles.size(); i++)
