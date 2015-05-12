@@ -64,17 +64,17 @@ int main()
             integrator_name.c_str());
   }
 
-
   Node root(lowercorner,uppercorner,ROOT);
-
   double t = 0.;
   int z = 0;
   for(t=0.; t<dt*1000.; t+=dt)
     {
+      printf("another here\n");
       for(int i=0; i<particles.size(); i++)
         {
           root.FigureParticle(&particles[i]);
         }
+      printf("did it work?\n");
       Node_vector_element_pointer initnodes;
       initnodes.push_back(&root);
       integrator->step(t, particles, initnodes);

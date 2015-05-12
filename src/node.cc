@@ -142,8 +142,13 @@ void Node::FigureParticle(Particle_vector_element_pointer passed_particle)
   if(whatami == ROOT)  //Should be a root node, so enter this part of the statement
     {
       quad_octant_name q_o;  //quadrant/octant for the particle being passed
-      q_o = FigureQuadOctant(*passed_particle);  //Figure out which quadrant/octant the particle belongs to
-      children[q_o]->FigureParticle(passed_particle);  //Pass particle to that quadrant/octant
+      if(q_o != ERROR_)  //Put it in the tree
+        {
+          q_o = FigureQuadOctant(*passed_particle);  //Figure out which quadrant/octant the particle belongs to
+          children[q_o]->FigureParticle(passed_particle);  //Pass particle to that quadrant/octant
+        }
+      //Else we received an error for the quad/octant.  The particle, for instance, may be outside the simulation box
+      //it won't be included in the tree anywhere
     }
   
   else if(whatami == PARENT) //If I already have children nodes
