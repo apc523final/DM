@@ -71,19 +71,21 @@ int main()
 
   Force force;
   
-  const std::string integrator_name = "euler";
+  const std::string integrator_name = "rk4";
 
   Integrator *integrator = NULL;
   if (integrator_name.compare("euler") == 0) {
     printf("#Setting up an euler integrator\n");
     integrator = new Euler(dt, force);
-  } /*else if (integrator_name.compare("leapfrog") == 0) {
-    std::cerr << "#Setting up a leapfrog integrator" << std::endl;
+  } 
+  else if (integrator_name.compare("leapfrog") == 0) {
+    printf("#Setting up a leapfrog integrator\n");
     integrator = new Leapfrog(dt, force);
-  } else if (integrator_name.compare("rk4") == 0) {
-    std::cerr << "#Setting up a runge-kutta integrator" << std::endl;
+  } 
+  else if (integrator_name.compare("rk4") == 0) {
+    printf("#Setting up a runge-kutta integrator\n");
     integrator = new RungeKutta4(dt, force);
-    }*/
+    }
   if (integrator == NULL) {
     fprintf(stderr, "ERROR: integrator %s is not known\n",
             integrator_name.c_str());
@@ -155,7 +157,7 @@ int main()
   initnodes.push_back(&root);
   printf("here\n");
   force.updateacceleration(initnodes, particles);
-  printf("there\n");
+  printf("Num particles is %lu\n", particles.size());
   double accx = particles[1].ax;
   checknotnum_double(accx, 0, "Acceleration is zero");
 
