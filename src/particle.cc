@@ -42,7 +42,8 @@ void print_particles(const Particle_vector &particles, std::ostream &f) {
   for (const auto &p : particles) {
     f << std::scientific;
     f << p.x << ' '
-      << p.y << ' ';
+      << p.y << ' '
+      << '0.0'; //Print out 0 for the z position
   }
   f << '\n';
 }

@@ -97,7 +97,7 @@ quad_octant_name Node::FigureQuadOctant(Particle particle)
       //If the particle is outside the boundaries of the box
       if(particle.x < lowercorner[0] || particle.x > uppercorner[0] || particle.y < lowercorner[1] || particle.y > uppercorner[1])
           {
-            printf("Particle is outside the boundaries of the node, don't know what to do with it.\n");
+            printf("#Particle is outside the boundaries of the node, don't know what to do with it.\n");
             return ERROR_;
           }
       
