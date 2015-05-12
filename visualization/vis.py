@@ -17,8 +17,8 @@ class NbodyCanvas(scene.SceneCanvas):
         """
         Initialize an NbodyCanvas
 
-        data : 2d array, (Ntimesteps, Nparticles*9)
-            position(3), velocity(3), and acceleration(9) of each particle
+        data : 2d array, (Ntimesteps, Nparticles*2)
+            position(2) of each particle
         istep : int
             advance timestep by this amount
         scale : float
@@ -42,7 +42,7 @@ class NbodyCanvas(scene.SceneCanvas):
         self.scale = scale
         self.meshes = []
         self.d = data
-        self.np = self.d.shape[1]/9  # number of particles
+        self.np = self.d.shape[1]/2  # number of particles
         self.nt = self.d.shape[0]  # number of timesteps
 
         colors = list(colors)
