@@ -33,3 +33,16 @@ double Particle::d(Particle &p) {
   return sqrt(pow((p.x-this->x), 2) +
               pow((p.y-this->y), 2));
 }
+
+
+/*
+ * Print formatted position of all particles
+ */
+void print_particles(const Particles &particles, std::ostream &f) {
+  for (const auto &p : particles) {
+    f << std::scientific;
+    f << p.x << ' '
+      << p.y << ' ';
+  }
+  f << '\n';
+}
