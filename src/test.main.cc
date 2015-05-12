@@ -36,6 +36,18 @@ void checkerror_int(const int value_to_check, const int value_to_check_against, 
     }
 }
 
+void checkerror_double2(const double value_to_check, const double value_to_check_against, const char *error_name, int particle_num=-1)
+{
+  double epsilon = 1.e-10;
+  if( fabs(value_to_check - value_to_check_against) > epsilon)
+    {
+      if(particle_num == -1) printf("ERROR DETECTED!!!!  Error name: %s\n",error_name);
+      else  printf("ERROR DETECTED!!!!  Error name: %s, loop number:%d\n",error_name,particle_num);
+      printf("You got %e, compared against %e\n",value_to_check,value_to_check_against);
+      numerrors++;
+    }
+}
+
 void checknotnum_double(const double value_to_check, const double value_to_check_against, const char *error_name, int particle_num=-1)
 {
   double epsilon = 1.e-15;
@@ -71,7 +83,7 @@ int main()
 
   Force force;
   
-  const std::string integrator_name = "rk4";
+  const std::string integrator_name = "leapfrog";
 
   Integrator *integrator = NULL;
   if (integrator_name.compare("euler") == 0) {
@@ -155,11 +167,23 @@ int main()
   //check force
   Node_vector_element_pointer initnodes;
   initnodes.push_back(&root);
-  printf("here\n");
   force.updateacceleration(initnodes, particles);
-  printf("Num particles is %lu\n", particles.size());
-  double accx = particles[1].ax;
+  // printf("Num particles is %lu\n", particles.size());
+  double accx = particles[0].ax;
   checknotnum_double(accx, 0, "Acceleration is zero");
+  // int c = 4;
+  // printf("Particle position %f, %f\n", particles[c].x, particles[c].y);
+  // printf("Final Acceleration %f, %f\n", particles[c].ax, particles[c].ay);
+  checkerror_double2(particles[0].ax, -2.4900387771, "Update Acceleration X is incorrect");
+  checkerror_double2(particles[0].ay, 2.4900387771, "Update Acceleration Y is incorrect");
+  checkerror_double2(particles[1].ax, -0.64010547863, "Update Acceleration X is incorrect");
+  checkerror_double2(particles[1].ay, -0.278044921452, "Update Acceleration Y is incorrect");
+  checkerror_double2(particles[2].ax, -0.451525432638, "Update Acceleration X is incorrect");
+  checkerror_double2(particles[2].ay, 0.451525432638, "Update Acceleration Y is incorrect");
+  checkerror_double2(particles[3].ax, 0.278044921452, "Update Acceleration X is incorrect");
+  checkerror_double2(particles[3].ay, 0.64010547863, "Update Acceleration Y is incorrect");
+  checkerror_double2(particles[4].ax, 1.65181238346, "Update Acceleration X is incorrect");
+  checkerror_double2(particles[4].ay, -1.65181238346, "Update Acceleration Y is incorrect");
 
   
   printf("*********\n Total number of errors: %d\n********\n",numerrors);

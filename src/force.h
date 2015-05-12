@@ -20,6 +20,7 @@ class Force {
   ~Force();
 
   void updateacceleration(Node_vector_element_pointer n, Particle_vector &p);
+  void cyclethroughnodes(Node_vector_element_pointer n, Particle &p);
   double calculateseparation(Particle &p, Node *n);
 
  private:

@@ -6,7 +6,7 @@
 #include <string>
 #include "global.h"
 
-const double G = 6.67E-11; //Gravitational constant in m^3/kg*s^2
+const double G = 1; //Gravitational constant in m^3/kg*s^2
 int counter = 0;
 int nodecounter = 0;
 /*NOTE TO FUTURE KRISTINA: USE: https://github.com/Nbodypp/HOW_final/blob/master/src/force_direct.cc
@@ -33,68 +33,83 @@ void Force::updateacceleration(Node_vector_element_pointer n, Particle_vector &p
             a.ay = 0.;
     		// a.az = 0.;
 	 }
+	// for (auto i = p.begin(); i != p.end(); ++i){
+ //    printf("Hi!, This is particle: %i\n", i);
+ //  	}
 
 	//Loop PROPERLY over particles and add to acceleration
-	  double r, dax, day, l, jx, jy, jmass;  // temp variables
+	   // temp variables
 	  for (auto i = p.begin(); i != p.end(); ++i) {
-	    r = 0.;
-	    dax = 0.;
-	    day = 0.;
-	    l=0.;
-	    jx=0.;
-	    jy=0.;
-	    jmass=0.;
-	    // daz = 0.;
-	    for (auto j = n.begin(); j != n.end(); ++j) {
-	      printf("Number of particles done= %d, Number of nodes done= %d\n", counter, nodecounter);
-	      // printf("Node is: %d\n", *j);
-	      r = calculateseparation(*i, *j);
-	      printf("Seperation is %f\n", r);
-	      if (r==0){
-	      	continue;
-	      }
-	      l = (*j)->uppercorner-(*j)->lowercorner;
-	      if ((l/r<theta) || ((*j)->whatami == LEAF)){
-	      	 printf("Using center of mass\n");
-	      	 jx = (*j)->com[0];
-	      	 jy = (*j)->com[1];
-	      	 jmass = (*j)->mass;
 
-	     	 dax = (jx - i->x) / pow(r, 3);
-	     	 day = (jy - i->y) / pow(r, 3);
-	     	 printf("Change in accel: %f, %f\n", dax, day);
-	     	 i->ax += jmass * dax;
-	      	 i->ay += jmass * day;
-	      	 nodecounter+=1;
-	      }
-	      else{
-	      	printf("Time to find the children nodes \n");
-	      	Node_vector_element_pointer childs;
-	      	for(int k=0; k<numchildren; k++){
-	      		if ((*j)->children[k]==NULL){
-	      			continue;
-	      		}
-	      		childs.push_back((*j)->children[k]);
-	      	}
-	      	updateacceleration(childs, p);
-	      	nodecounter +=1;
-	      }
-	    // jx = j->com[0];
-	    // jy = j->com[1];
-	    // jmass = j->mass;
-              
-	    // dax = (jx - i->x) / pow(r, 3);
-	    // day = (jy - i->y) / pow(r, 3);
-	      
-	    // i->ax += jmass * dax;
-	    // i->ay += jmass * day;
-            }
-            counter+=1;
-            i->ax *= G;
-            i->ay *= G;
+	    cyclethroughnodes(n, *i);
+        counter+=1;
+        i->ax *= G;
+        i->ay *= G;
           }
           
 }
+
+void Force::cyclethroughnodes(Node_vector_element_pointer n, Particle &i){
+  double r, dax, day, l, jx, jy, jmass; 
+	r = 0.;
+    dax = 0.;
+    day = 0.;
+    l=0.;
+    jx=0.;
+    jy=0.;
+    jmass=0.;
+  for (auto j = n.begin(); j != n.end(); ++j) {
+	  // printf("This is particle %i\n", *i);
+	  // printf("Number of particles done= %d, Number of nodes done= %d\n", counter, nodecounter);
+	  // printf("Node is: %d\n", *j);
+	  r = calculateseparation(i, *j);
+	  // printf("Seperation is %f\n", r);
+	  if (r==0){
+	  	// printf("This is me! Proceed to next node please!\n");
+	  	nodecounter+=1;
+	  	continue;
+	  }
+	  l = (*j)->uppercorner[0]-(*j)->lowercorner[0];
+	  if ((l/r<theta) || ((*j)->whatami == LEAF)){
+	  	 // printf("Using center of mass\n");
+	  	 jx = (*j)->com[0];
+	  	 jy = (*j)->com[1];
+	  	 jmass = (*j)->mass;
+
+	 	 dax = (jx - i.x) / pow(r, 3);
+	 	 day = (jy - i.y) / pow(r, 3);
+	 	 // printf("Change in accel: %f, %f\n", dax, day);
+	 	 i.ax += jmass * dax;
+	  	 i.ay += jmass * day;
+	  	 nodecounter+=1;
+	  }
+	  else{
+	  	// printf("Time to find the children nodes \n");
+	  	Node_vector_element_pointer childs;
+	  	for(int k=0; k<numchildren; k++){
+	  		if ((*j)->children[k]==NULL){
+	  			continue;
+	  		}
+	  		childs.push_back((*j)->children[k]);
+	  	}
+	  	cyclethroughnodes(childs, i);
+	  }
+	// jx = j->com[0];
+	// jy = j->com[1];
+	// jmass = j->mass;
+	      
+	// dax = (jx - i->x) / pow(r, 3);
+	// day = (jy - i->y) / pow(r, 3);
+	  
+	// i->ax += jmass * dax;
+	// i->ay += jmass * day;
+	}
+
+
+
+}
+
+
 
 double Force::calculateseparation(Particle &part, Node *nod)
 {
