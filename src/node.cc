@@ -218,12 +218,10 @@ Node::~Node()
   //Delete children nodes
   for(int i=0; i<numchildren; i++)
     {
-      printf("Deleting nodes\n");
       if(whatami != LEAF)
         {
           if(children[i] != NULL)
             {
-              printf("    %d   %lf",i, children[i]);
               delete children[i];
             }
         }
