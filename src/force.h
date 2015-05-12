@@ -20,7 +20,7 @@ class Force {
   ~Force();
 
   void updateacceleration(Node_vector_element_pointer n, Particle_vector &p);
-  double calculateseparation(Particle &p, Node &n);
+  double calculateseparation(Particle &p, Node *n);
 
  private:
   int gravity_;

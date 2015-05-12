@@ -48,9 +48,9 @@ void Force::updateacceleration(Node_vector_element_pointer n, Particle_vector &p
 	      r = calculateseparation(*i, *j);
 	      l = (*j)->uppercorner-(*j)->lowercorner;
 	      if (l/r<theta){
-	      	 jx = j->com[0];
-	      	 jy = j->com[1];
-	      	 jmass = j->mass;
+	      	 jx = (*j)->com[0];
+	      	 jy = (*j)->com[1];
+	      	 jmass = (*j)->mass;
 
 	     	 dax = (jx - i->x) / pow(r, 3);
 	     	 day = (jy - i->y) / pow(r, 3);
@@ -60,7 +60,7 @@ void Force::updateacceleration(Node_vector_element_pointer n, Particle_vector &p
 	      else{
 	      	Node_vector_element_pointer childs;
 	      	for(int k=0; k<4; k++){
-	      	childs.push_back(j->children[k]);
+	      	childs.push_back((*j)->children[k]);
 	      	}
 	      	updateacceleration(childs, p);
 	      }
@@ -80,11 +80,11 @@ void Force::updateacceleration(Node_vector_element_pointer n, Particle_vector &p
           
 }
 
-double Force::calculateseparation(Particle &part, Node &nod)
+double Force::calculateseparation(Particle &part, Node *nod)
 {
     double jx, jy;
-    jx = nod.com[0];
-    jy = nod.com[1];
+    jx = nod->com[0];
+    jy = nod->com[1];
     return sqrt(pow((jx-part.x), 2) +
               pow((jy-part.y), 2));
 }
