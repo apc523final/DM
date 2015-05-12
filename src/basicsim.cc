@@ -69,11 +69,6 @@ int main()
   int z = 0;
   for(t=0.; t<dt*1000; t+=dt)
     {
-<<<<<<< HEAD
-=======
-
-      printf("another here\n");
->>>>>>> 25eb8cfa4eb2dbd15b5bb9bee2fdb090d677d2ad
       for(int i=0; i<particles.size(); i++)
         {
           root.FigureParticle(&particles[i]);
@@ -88,10 +83,10 @@ int main()
       Node root(lowercorner,uppercorner,ROOT);
       
 
-      // if(z%20 == 0)
-      //   {
-      //     print_particles(particles, std::cout);
-      //   }      
+       if(z%20 == 0)
+         {
+           print_particles(particles, std::cout);
+         }      
       z++;
     }
 
