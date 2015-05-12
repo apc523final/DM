@@ -17,8 +17,8 @@ Particle::Particle(double mass, double x, double y)
   : mass(mass),
     x(x),
     y(y),
-    vx(x),
-    vy(y),
+    vx(0.),
+    vy(0.),
     ax(0.),
     ay(0.)
 {}

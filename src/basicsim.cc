@@ -67,7 +67,7 @@ int main()
   Node root(lowercorner,uppercorner,ROOT);
   double t = 0.;
   int z = 0;
-  for(t=0.; t<dt*1000; t+=dt)
+  for(t=0.; t<dt*2; t+=dt)
     {
       for(int i=0; i<particles.size(); i++)
         {
@@ -80,7 +80,6 @@ int main()
       print_particles(particles, std::cout);
 
       root.Reset();
-      Node root(lowercorner,uppercorner,ROOT);
       
 
        if(z%20 == 0)
