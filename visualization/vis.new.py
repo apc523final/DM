@@ -17,8 +17,8 @@ class NbodyCanvas(scene.SceneCanvas):
         """
         Initialize an NbodyCanvas
 
-        data : 2d array, (Ntimesteps, Nparticles*9)
-            position(3), velocity(3), and acceleration(9) of each particle
+        data : 2d array, (Ntimesteps, Nparticles*2)
+            position(2) of each particle
         istep : int
             advance timestep by this amount
         scale : float
@@ -70,9 +70,9 @@ class NbodyCanvas(scene.SceneCanvas):
             self.close()
 
     def on_timer(self, event):
-        coords_old = np.vstack(np.split(self.d[self.i], self.np))
+        coords_old = np.vstack(np.split(self.d[self.i], self.np))[:, :3]
         coords_new = np.vstack(np.split(self.d[(self.i+self.istep) % self.nt],
-                               self.np))
+                               self.np))[:, :3]
         coords_trans = coords_new - coords_old
         # move particles forward
         for mm, (dx, dy, dz) in zip(self.meshes, coords_trans):
