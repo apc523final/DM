@@ -59,15 +59,15 @@ void Force::cyclethroughnodes(Node_vector_element_pointer n, Particle &i){
     jmass=0.;
   for (auto j = n.begin(); j != n.end(); ++j) {
 	  // printf("This is particle %i\n", i);
-	  printf("Number of particles done= %d, Number of nodes done= %d\n", counter, nodecounter);
+	  printf("#Number of particles done= %d, Number of nodes done= %d\n", counter, nodecounter);
 	  //printf("Node is: %d\n", *j);
 	  r = calculateseparation(i, *j);
-	  printf("Seperation is %f\n", r);
+	  printf("#Seperation is %f\n", r);
 	  if (r<1e-6){
-	  	printf("This is me! Proceed to next node please!\n");
+	  	printf("#This is me! Proceed to next node please!\n");
 	  	dax = 0.;
 	 	day = 0.;
-	 	printf("Change in accel: %f, %f\n", dax, day);
+	 	printf("#Change in accel: %f, %f\n", dax, day);
 	 	i.ax += jmass * dax;
 	  	i.ay += jmass * day;
 	  	nodecounter+=1;
@@ -76,20 +76,20 @@ void Force::cyclethroughnodes(Node_vector_element_pointer n, Particle &i){
 	  l = (*j)->uppercorner[0]-(*j)->lowercorner[0];
 	  // printf("%f\n", l);
 	  if ((l/r<theta) || ((*j)->whatami == LEAF)){
-	  	 printf("Using center of mass\n");
+	  	 printf("#Using center of mass\n");
 	  	 jx = (*j)->com[0];
 	  	 jy = (*j)->com[1];
 	  	 jmass = (*j)->mass;
 
 	 	 dax = (jx - i.x) / pow(r, 3);
 	 	 day = (jy - i.y) / pow(r, 3);
-	 	 printf("Change in accel: %f, %f\n", dax, day);
+	 	 printf("#Change in accel: %f, %f\n", dax, day);
 	 	 i.ax += jmass * dax;
 	  	 i.ay += jmass * day;
 	  	 nodecounter+=1;
 	  }
 	  else{
-	  	printf("Time to find the children nodes \n");
+	  	printf("#Time to find the children nodes \n");
 	  	Node_vector_element_pointer childs;
 	  	for(int k=0; k<numchildren; k++){
 	  		if ((*j)->children[k]==NULL){
