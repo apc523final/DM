@@ -187,5 +187,6 @@ int main()
 
   
   printf("*********\n Total number of errors: %d\n********\n",numerrors);
+  printf("Remember to make sure G is set to 1. and theta is set to be 0\n");
   return 0;
 }

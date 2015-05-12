@@ -6,7 +6,6 @@
 #include <string>
 #include "global.h"
 
-const double G = 1; //Gravitational constant in m^3/kg*s^2
 int counter = 0;
 int nodecounter = 0;
 /*NOTE TO FUTURE KRISTINA: USE: https://github.com/Nbodypp/HOW_final/blob/master/src/force_direct.cc
