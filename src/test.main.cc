@@ -7,6 +7,8 @@
 #include "integrator.h"
 #include "euler.h"
 #include "force.h"
+#include "runge-kutta.h"
+#include "leapfrog.h"
 
 
 int numerrors;

@@ -10,7 +10,7 @@ CXX=g++
 
 
 
-test: test.main.o node.o particle.o euler.o force.o 
+test: test.main.o node.o particle.o euler.o force.o runge-kutta.o leapfrog.o
 	$(CXX) $(CFLAGS) -o $@ $^
 
 clean:
