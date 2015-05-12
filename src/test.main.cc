@@ -149,8 +149,8 @@ int main()
   checkerror_double(root.children[NW]->children[NE]->mass,1.0,"Parent passing existing particle correctly");
 
   //check force
-  Node_vector initnodes;
-  initnodes.push_back(root);
+  Node_vector_element_pointer initnodes;
+  initnodes.push_back(&root);
   printf("here\n");
   force.updateacceleration(initnodes, particles);
   printf("there\n");

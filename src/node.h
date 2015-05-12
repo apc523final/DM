@@ -51,8 +51,7 @@ class Node {
 //Define a std::vector for storing many instances of Node
 typedef std::vector<Node> Node_vector;
 
-//Define a pointer to a specific element of Node_vector
-//This pointer is also (roughly?) equivalent to Node *
+//Define a pointer to a Node
 typedef std::vector<Node *> Node_vector_element_pointer;
 
 

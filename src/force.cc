@@ -23,7 +23,7 @@ Force::~Force()
 
 
 //Function that calculates force
-void Force::updateacceleration(Node_vector &n, Particle_vector &p)
+void Force::updateacceleration(Node_vector_element_pointer n, Particle_vector &p)
 {
       	//Set acceleration to 0
   	for (auto &a : p) {
@@ -46,7 +46,7 @@ void Force::updateacceleration(Node_vector &n, Particle_vector &p)
 	    // daz = 0.;
 	    for (auto j = n.begin(); j != n.end(); ++j) {
 	      r = calculateseparation(*i, *j);
-	      l = j->uppercorner-j->lowercorner;
+	      l = (*j)->uppercorner-(*j)->lowercorner;
 	      if (l/r<theta){
 	      	 jx = j->com[0];
 	      	 jy = j->com[1];
