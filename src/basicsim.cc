@@ -67,17 +67,21 @@ int main()
   Node root(lowercorner,uppercorner,ROOT);
   double t = 0.;
   int z = 0;
-  for(t=0.; t<dt*2000; t+=dt)
+  for(t=0.; t<dt*1; t+=dt)
     {
+      print_particles(particles, std::cout);
+
       for(int i=0; i<particles.size(); i++)
         {
           root.FigureParticle(&particles[i]);
 
         }
+      
       Node_vector_element_pointer initnodes;
       initnodes.push_back(&root);
       integrator->step(t, particles, initnodes);
       print_particles(particles, std::cout);
+      
 
       root.Reset();
       

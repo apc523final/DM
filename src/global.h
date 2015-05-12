@@ -35,7 +35,7 @@ const int numdimen = 2;
      }*/
 const int numchildren = 4;
 
-const double theta = 1.; //Parameter for deciding when to calculate using COM or going to children nodes
+const double theta = 0.; //Parameter for deciding when to calculate using COM or going to children nodes
 
 const double G = 1.;
 
