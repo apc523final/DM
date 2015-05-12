@@ -16,9 +16,9 @@ int main()
 {
   //numchildren = 4;
 
-  double dt = .1;
-  int numx = 10;
-  int numy = 10;
+  double dt = .0001;
+  int numx = 5;
+  int numy = 5;
   double particlemass = 1.0;
   
   Particle_vector particles;
@@ -27,10 +27,10 @@ int main()
 
   double lowercorner[2];
   double uppercorner[2];
-  lowercorner[0]=-2.0;
-  lowercorner[1]=-2.0;
-  uppercorner[0]=2.0;
-  uppercorner[1]=2.0;
+  lowercorner[0]=-5.0;
+  lowercorner[1]=-5.0;
+  uppercorner[0]=5.0;
+  uppercorner[1]=5.0;
 
   for(int i=0; i<numx; i++)
     {
@@ -67,21 +67,31 @@ int main()
   Node root(lowercorner,uppercorner,ROOT);
   double t = 0.;
   int z = 0;
-  for(t=0.; t<dt*1000.; t+=dt)
+  for(t=0.; t<dt*1000; t+=dt)
     {
+<<<<<<< HEAD
+=======
+
+      printf("another here\n");
+>>>>>>> 25eb8cfa4eb2dbd15b5bb9bee2fdb090d677d2ad
       for(int i=0; i<particles.size(); i++)
         {
           root.FigureParticle(&particles[i]);
+
         }
       Node_vector_element_pointer initnodes;
       initnodes.push_back(&root);
       integrator->step(t, particles, initnodes);
-      root.Reset();
+      print_particles(particles, std::cout);
 
-      if(z%20 == 0)
-        {
-          print_particles(particles, std::cout);
-        }      
+      root.Reset();
+      Node root(lowercorner,uppercorner,ROOT);
+      
+
+      // if(z%20 == 0)
+      //   {
+      //     print_particles(particles, std::cout);
+      //   }      
       z++;
     }
 
