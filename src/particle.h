@@ -9,6 +9,7 @@
 #define PARTICLE_H_
 
 #include <vector>
+#include <iostream>
 
 //The Particle class
 class Particle {
@@ -39,6 +40,6 @@ typedef std::vector<Particle> Particle_vector;
 typedef std::vector<Particle>::pointer Particle_vector_element_pointer;
 
 //This function will print the positions of all the particles
-void print_particles(const Particles &particles, std::ostream &f);
+void print_particles(const Particle_vector &particles, std::ostream &f);
 
 #endif //PARTICLE_H_

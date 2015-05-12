@@ -38,7 +38,7 @@ double Particle::d(Particle &p) {
 /*
  * Print formatted position of all particles
  */
-void print_particles(const Particles &particles, std::ostream &f) {
+void print_particles(const Particle_vector &particles, std::ostream &f) {
   for (const auto &p : particles) {
     f << std::scientific;
     f << p.x << ' '

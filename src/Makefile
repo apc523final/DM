@@ -13,5 +13,8 @@ CXX=g++
 test: test.main.o node.o particle.o euler.o force.o runge-kutta.o leapfrog.o
 	$(CXX) $(CFLAGS) -o $@ $^
 
+basicsim: basicsim.o node.o particle.o euler.o force.o runge-kutta.o leapfrog.o
+	$(CXX) $(CFLAGS) -o $@ $^
+
 clean:
 	-rm -rf *.o test
