@@ -17,7 +17,7 @@ int main()
 {
   //numchildren = 4;
 
-  double dt = .0003;
+  double dt = .003;
   int numx = 5;
   int numy = 5;
   double particlemass = 100.0;
@@ -76,7 +76,7 @@ int main()
   Node root(lowercorner,uppercorner,ROOT);
   double t = 0.;
   int z = 0;
-  for(t=0.; t<dt*2; t+=dt)
+  for(t=0.; t<dt*2000; t+=dt)
     {
 
       for(int i=0; i<particles.size(); i++)

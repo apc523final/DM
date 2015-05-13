@@ -63,7 +63,7 @@ void Force::cyclethroughnodes(Node_vector_element_pointer n, Particle &i){
         continue;
       }
     r = calculateseparation(i, *j);
-    if (r<1e-6){
+    if (r<1e-1){
       //printf("#This is me! Proceed to next node please!\n");
       nodecounter+=1;
       continue;
