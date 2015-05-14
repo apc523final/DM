@@ -19,6 +19,13 @@ Node::Node(double *lowercorner_, double *uppercorner_, Node_Type nodetype)
   y_halfway = lowercorner[1] + (uppercorner[1] - lowercorner[1])/2.0; //The y-midpoint of the node
   //z_halfway = lowercorner[2] + (uppercorner[2] - lowercorner[2])/2.0;  //The z-midpoint of the node (currently off for development)
 
+  mass = 0.;
+  for(int i=0; i<numdimen; i++)
+    {
+      com[i] = 0.;
+    }
+  
+
   /*If this is the ROOT node, start out with some children already*/
   if(nodetype == ROOT)
     {
@@ -27,8 +34,8 @@ Node::Node(double *lowercorner_, double *uppercorner_, Node_Type nodetype)
       children[SE] = BearChild(SE); //Create the SE child
       children[SW] = BearChild(SW); //Create the SW child
     }
-  
-  /*If not root node, nitialize all the pointers to children to be NULL; we haven't had any children yet!*/
+
+  /*If not root node, initialize all the pointers to children to be NULL; we haven't had any children yet!*/
   else
     {
       for(int i=0; i<numchildren; i++)
