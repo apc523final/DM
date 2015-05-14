@@ -97,7 +97,7 @@ quad_octant_name Node::FigureQuadOctant(Particle particle)
       //If the particle is outside the boundaries of the box
       if(particle.x < lowercorner[0] || particle.x > uppercorner[0] || particle.y < lowercorner[1] || particle.y > uppercorner[1])
           {
-            printf("#Particle is outside the boundaries of the node, don't know what to do with it.\n");
+            //printf("#Particle is outside the boundaries of the node, don't know what to do with it.\n");
             return ERROR_;
           }
       
@@ -188,7 +188,7 @@ void Node::FigureParticle(Particle_vector_element_pointer passed_particle)
       particle_leaf = NULL;  //Remove this node's attachment to a specific particle
       whatami = PARENT;  //This node is now a parent node
     }
-  else if(whatami == EMPTY) //If the node is EMPTY
+  else if(whatami == EMPY) //If the node is EMPTY
     {
       mass = passed_particle->mass; //Update node mass to be particle mass
       com[0] = passed_particle->x;  //Update center of mass position to be particle position

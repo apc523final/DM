@@ -29,7 +29,7 @@ class Particle {
   double ax;  //x-direction acceleration of the particle
   double ay;  //y-direction acceleration of the particle
 
-  double d(Particle &particle);
+  //double d(Particle &particle);
 };
 
 //Define a std::vector for storing many instances of Particle
@@ -41,5 +41,8 @@ typedef std::vector<Particle>::pointer Particle_vector_element_pointer;
 
 //This function will print the positions of all the particles
 void print_particles(const Particle_vector &particles, std::ostream &f);
+
+//This function will calculate the energy of all the particles, potential + kinetic
+double total_energy(Particle_vector &particles);
 
 #endif //PARTICLE_H_
