@@ -39,4 +39,10 @@ const double theta = 1.; //Parameter for deciding when to calculate using COM or
 
 const double G = 1.;
 
+const double rmin = 1e-1;
+
+const double dx = .1; //Used in courant condition
+
+const double C = 1; //Courant number
+
 #endif //GLOBAL_H_
