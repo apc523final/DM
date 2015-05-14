@@ -18,8 +18,8 @@ int main()
   //numchildren = 4;
 
   double dt = 1e-7;
-  int numx = 2;
-  int numy = 2;
+  int numx = 5;
+  int numy = 5;
   double particlemass = 100.0;
   
   Particle_vector particles;
@@ -37,8 +37,8 @@ int main()
     {
       for(int j=0; j<numy; j++)
         {
-          double x = ( ((double)i+.5)/((double)(numx + 1))) * (uppercorner[0] - lowercorner[0]) + lowercorner[0];
-          double y = ( ((double)j+.5)/((double)(numy + 1))) * (uppercorner[1] - lowercorner[1]) + lowercorner[1];
+          double x = ( ((double)i+.5)/((double)(numx))) * (uppercorner[0] - lowercorner[0]) + lowercorner[0];
+          double y = ( ((double)j+.5)/((double)(numy))) * (uppercorner[1] - lowercorner[1]) + lowercorner[1];
           particles.push_back(Particle(particlemass,x,y));;
         }
     }
@@ -89,9 +89,10 @@ int main()
       root.Reset();
       
 
-       if(z%20 == 0)
+       if(z%100 == 0)
          {
            print_particles(particles, std::cout);
+           printf("\n");
          }      
       z++;
     }
