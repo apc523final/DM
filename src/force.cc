@@ -108,6 +108,6 @@ double Force::calculateseparation(Particle &part, Node *nod)
   double jx_, jy_;
   jx_ = nod->com[0];
   jy_= nod->com[1];
-  return sqrt(pow((part.x-j.x), 2) +
-              pow((part.y-j.x), 2));
+  return sqrt(pow((part.x-jx_), 2) +
+              pow((part.y-jy_), 2));
 }

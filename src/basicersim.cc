@@ -20,7 +20,7 @@ int main()
   double dt = .0001;
   int numx = 5;
   int numy = 5;
-  double particlemass = 100.0;
+  double particlemass = 10.0;
   
   Particle_vector particles;
 
@@ -42,11 +42,11 @@ int main()
           particles.push_back(Particle(particlemass,x,y));;
         }
         }*/
-  particles.push_back(Particle(1.,-.5,0.));
-  particles.push_back(Particle(1.,.5,0.));
+  particles.push_back(Particle(1.,-.5,1.));
+  particles.push_back(Particle(1.,.5,1.));
 
-  particles[0].vy = 1./sqrt(2.);
-  particles[1].vy = -1./sqrt(2.);
+  particles[0].vx = -1./sqrt(2.);
+  particles[1].vx = 1./sqrt(2.);
   
   Force force;
   
@@ -103,7 +103,7 @@ int main()
        if(z%400 == 0)
          {
            print_particles(particles, std::cout);
-           //printf("       %e",total_energy(particles));
+           printf("       %e",total_energy(particles));
            printf("\n");
          }      
       z++;
