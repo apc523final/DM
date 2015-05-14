@@ -72,11 +72,7 @@ int main()
   Node root(lowercorner,uppercorner,ROOT);
   double t = 0.;
   int z = 0;
-<<<<<<< HEAD
   for(t=0.; t<dt*12000; t+=dt)
-=======
-  for(t=0.; t<dt*1e7; t+=dt)
->>>>>>> 7164d55213fd2381666645359c6ea6a4f2f27414
     {
 
       for(int i=0; i<particles.size(); i++)
