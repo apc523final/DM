@@ -188,7 +188,7 @@ void Node::FigureParticle(Particle_vector_element_pointer passed_particle)
       particle_leaf = NULL;  //Remove this node's attachment to a specific particle
       whatami = PARENT;  //This node is now a parent node
     }
-  else if(whatami == EMPY) //If the node is EMPTY
+  else if(whatami == EMPTY) //If the node is EMPTY
     {
       mass = passed_particle->mass; //Update node mass to be particle mass
       com[0] = passed_particle->x;  //Update center of mass position to be particle position
