@@ -42,8 +42,8 @@ int main()
           particles.push_back(Particle(particlemass,x,y));;
         }
         }*/
-  particles.push_back(Particle(1.,-.5,.5));
-  particles.push_back(Particle(1.,.5,.5));
+  particles.push_back(Particle(1.,-.5,0.));
+  particles.push_back(Particle(1.,.5,0.));
 
   particles[0].vy = 1./sqrt(2.);
   particles[1].vy = -1./sqrt(2.);
@@ -86,10 +86,11 @@ int main()
 
         }
 
-      if(z%400 == 0)
+      /*if(z%10 == 0)
         {
           print_particles(particles, std::cout);
-          printf("   %e   %e   %e   %e\n",root.children[0]->com[0],root.children->
+          printf("   %e   %e   %e   %e\n",root.children[0]->com[0],root.children[0]->com[1],root.children[1]->com[0],root.children[1]->com[1]);
+          }*/
       
       Node_vector_element_pointer initnodes;
       initnodes.push_back(&root);
@@ -99,11 +100,11 @@ int main()
       root.Reset();
       
 
-       if(z%40000 == 0)
+       if(z%400 == 0)
          {
-           //print_particles(particles, std::cout);
+           print_particles(particles, std::cout);
            //printf("       %e",total_energy(particles));
-           //printf("\n");
+           printf("\n");
          }      
       z++;
     }

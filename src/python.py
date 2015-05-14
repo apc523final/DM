@@ -2,6 +2,9 @@ import numpy as np
 import matplotlib.pyplot as pp
 
 x1,y1,z1,x2,y2,z2,energy = np.loadtxt("candelete.txt",unpack=True)
+#x1,y1,z1,x2,y2,z2,com0x,com0y,com1x,com1y = np.loadtxt("candelete.txt",unpack=True)
+
+
 
 pp.plot(range(len(x1)),x1,label='x1')
 pp.plot(range(len(y1)),y1,label='y1')

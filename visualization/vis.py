@@ -13,7 +13,7 @@ from vispy.geometry import create_sphere
 
 
 class NbodyCanvas(scene.SceneCanvas):
-    def __init__(self, data, istep=1, scale=1., colors='y', R=0.01):
+    def __init__(self, data, istep=1, scale=1., colors='y', R=.01):
         """
         Initialize an NbodyCanvas
 
@@ -35,7 +35,7 @@ class NbodyCanvas(scene.SceneCanvas):
         self.axis = scene.visuals.XYZAxis(parent=view.scene)
         self.timer = app.Timer(0.1, connect=self.on_timer, start=True)
         # create mesh of a phere
-        self.mdata = create_sphere(200, 400, R)
+        self.mdata = create_sphere(200, 400, .08)
 
         self.i = 0
         self.istep = istep
