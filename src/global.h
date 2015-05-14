@@ -45,4 +45,7 @@ const double dx = .1; //Used in courant condition
 
 const double C = 1; //Courant number
 
+const bool use_softening = false; //Use softening parameter
+
+
 #endif //GLOBAL_H_
