@@ -1,8 +1,5 @@
-/**
- * @file
- *
- * @brief Semi Implicit Euler integrator
- */
+/*euler_semi_implicit.h
+Header file for Semi-Implicit Euler Integrator*/
 
 #ifndef EULER_SI_H_
 #define EULER_SI_H_
@@ -10,14 +7,14 @@
 #include "integrator.h"
 #include "force.h"
 
-/**
- * @brief Semi Implicit Euler integrator
- */
+
 class Euler_SI : public Integrator {
  public:
-  Euler_SI(double dt, Force &force);
-  ~Euler_SI();
+  Euler_SI(double dt, Force &force); //Constructor
+  ~Euler_SI(); //Destuctor
+  //Integrates one step forward using Forward Euler method
   int step(double t, Particle_vector &particles, Node_vector_element_pointer nodes);
+ 
  private:
   const double dt_;       // timestep
   Force &force_;    // Force model

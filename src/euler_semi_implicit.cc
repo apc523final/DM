@@ -1,23 +1,25 @@
+/*euler_semi_implicit.cc
+Semi-Impliciti Euler Method*/
+
 #include "euler_semi_implicit.h"
 #include "particle.h"
 #include "node.h"
 
-/**
- * @param dt timestep
- * @param foce Force model
- */
+
+//Constructor
 Euler_SI::Euler_SI(double dt, Force &force)
   : dt_(dt),
     force_(force) {
 }
 
+//Destructor
 Euler_SI::~Euler_SI() {
 }
 
-/** Step particles' position and velocity */
+//Integrates one step forward using Forward Euler method
 int Euler_SI::step(double t, Particle_vector &particles, Node_vector_element_pointer nodes) {
 
-  force_.updateacceleration(nodes, particles);
+  force_.updateacceleration(nodes, particles); //Use force method to update acceleration
   for (auto &p : particles) {
     // Calculate velocity
     p.vx += dt_ * p.ax;
