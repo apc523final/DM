@@ -62,7 +62,12 @@ void Force::cyclethroughnodes(Node_vector_element_pointer n, Particle &i, double
       }
     r = calculateseparation(i, *j);
     if (use_softening){
-        epsilon = 4/N;
+        if(N>100){
+          epsilon = 4./N;
+        }
+        else{
+          epsilon = 4.e-6/N;
+        }
     }
     if (r==0){
       //printf("#This is me! Proceed to next node please!\n");
