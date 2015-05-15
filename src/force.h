@@ -1,4 +1,5 @@
-/* Header file for the force calculation code*/
+/* force.h 
+Header file for the force calculation code*/
 
 
 #ifndef FORCE_H_
@@ -10,17 +11,21 @@
 #include "node.h"
 
 
-/*Define functions used in Force calculation*/
-
-
+/*Define functions used in Force class*/
 
 class Force {
  public:
-  Force();
-  ~Force();
+  Force(); //Constructor
+  ~Force(); //Destructor
 
+
+//Updates acceleration for each particle in particle vector
   void updateacceleration(Node_vector_element_pointer n, Particle_vector &p);
+
+//Cycles through nodes to find the acceleration
   void cyclethroughnodes(Node_vector_element_pointer n, Particle &p, double N);
+
+//Calculates the distance between a particle and the center of mass of the node
   double calculateseparation(Particle &p, Node *n);
 
 };
