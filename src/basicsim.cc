@@ -41,6 +41,14 @@ int main()
           particles.push_back(Particle(particlemass,x,y));;
         }
     }
+
+  lowercorner[0]=-500.0;
+  lowercorner[1]=-500.0;
+  uppercorner[0]=500.0;
+  uppercorner[1]=500.0;
+
+
+
   
   Force force;
   
@@ -71,7 +79,6 @@ int main()
   Node root(lowercorner,uppercorner,ROOT);
   double t = 0.;
   int z = 0;
-  for(t=0.; t<dt*50000; t+=dt)
   for(t=0.; t<dt*12000; t+=dt)
     {
 
