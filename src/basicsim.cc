@@ -16,8 +16,7 @@
 int main()
 {
   double dt = 1e-4;
-
-  double dt = 1e-7;
+  
   int numx = 5;
   int numy = 5;
   double particlemass = 1.0;
