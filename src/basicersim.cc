@@ -17,14 +17,9 @@ int main()
 {
   //numchildren = 4;
 
-  double dt = .0001;
-  int numx = 5;
-  int numy = 5;
-  double particlemass = 10.0;
+  double dt = .0005;
   
   Particle_vector particles;
-
-
 
   double lowercorner[2];
   double uppercorner[2];
@@ -42,11 +37,13 @@ int main()
           particles.push_back(Particle(particlemass,x,y));;
         }
         }*/
-  particles.push_back(Particle(1.,-.5,1.));
-  particles.push_back(Particle(1.,.5,1.));
+  particles.push_back(Particle(1.,-5.,5.));
+  particles.push_back(Particle(1.,-4.,5.));
+  //particles.push_back(Particle(1.,-.5,.1));
+  //particles.push_back(Particle(1.,.5,.1));
 
-  particles[0].vx = -1./sqrt(2.);
-  particles[1].vx = 1./sqrt(2.);
+  particles[0].vy = -1./sqrt(2.);
+  particles[1].vy = 1./sqrt(2.);
   
   Force force;
   
@@ -77,7 +74,7 @@ int main()
   Node root(lowercorner,uppercorner,ROOT);
   double t = 0.;
   int z = 0;
-  for(t=0.; t<dt*50000; t+=dt)
+  for(t=0.; t<dt*30000; t+=dt)
     {
 
       for(int i=0; i<particles.size(); i++)
@@ -100,7 +97,7 @@ int main()
       root.Reset();
       
 
-       if(z%400 == 0)
+       if(z%1000 == 0)
          {
            print_particles(particles, std::cout);
            printf("       %e",total_energy(particles));

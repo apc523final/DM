@@ -8,14 +8,12 @@
 
 int counter = 0;
 int nodecounter = 0;
-/*NOTE TO FUTURE KRISTINA: USE: https://github.com/Nbodypp/HOW_final/blob/master/src/force_direct.cc
-NEED TO FIX calculateforce function!
+/*NEED TO FIX calculateforce function!
 ALSO: FIX THE DANG HEADER FILE!
 */
 
 //Force Constructor
-Force::Force(int gravity/*=1*/)
-  : gravity_(gravity)
+Force::Force()
 {}
 
 //Force Destructor
@@ -33,9 +31,6 @@ void Force::updateacceleration(Node_vector_element_pointer n, Particle_vector &p
     a.ay = 0.;
     // a.az = 0.;
   }
-  // for (auto i = p.begin(); i != p.end(); ++i){
-  //    printf("Hi!, This is particle: %i\n", i);
-  //  	}
 
   //Loop PROPERLY over particles and add to acceleration
   // temp variables
