@@ -36,17 +36,11 @@ const int numdimen = 2;
    {
      printf("WARNING! WARNING! Unknown number of dimensions defined!  It is %d\n",numdimen);
      }*/
-const int numchildren = 4;
+const int numchildren = 4; //Parameter which gives the number of children each node should birth
 
 const double theta = 1.; //Parameter for deciding when to calculate using COM or going to children nodes
 
-const double G = 1.;
-
-const double rmin = 1e-1;
-
-const double dx = .1; //Used in courant condition
-
-const double C = 1; //Courant number
+const double G = 1.; //Gravitational constant, which we set to 1 for easier calculations
 
 const bool use_softening = true; //Use softening parameter
 
