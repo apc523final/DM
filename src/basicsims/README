@@ -1,0 +1,4 @@
+This directory contains source code for some of our basic simulations we used
+for testing and visualization purposes.  Since this code was very flexible and
+changed a lot we did not add many comments, so reader beware.  A better example
+code can be found one directory up, in example.main.cc.

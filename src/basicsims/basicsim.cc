@@ -23,8 +23,6 @@ int main()
   
   Particle_vector particles;
 
-
-
   double lowercorner[2];
   double uppercorner[2];
   lowercorner[0]=-5.0;
@@ -52,7 +50,7 @@ int main()
   
   Force force;
   
-  const std::string integrator_name = "leapfrog";
+  const std::string integrator_name = "rk4";
 
   Integrator *integrator = NULL;
   if (integrator_name.compare("euler") == 0) {
