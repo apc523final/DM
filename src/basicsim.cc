@@ -15,7 +15,7 @@
 
 int main()
 {
-  double dt = 1e-4;
+  double dt = .5e-4;
   
   int numx = 5;
   int numy = 5;
@@ -52,7 +52,7 @@ int main()
   
   Force force;
   
-  const std::string integrator_name = "euler semi";
+  const std::string integrator_name = "leapfrog";
 
   Integrator *integrator = NULL;
   if (integrator_name.compare("euler") == 0) {
@@ -79,7 +79,7 @@ int main()
   Node root(lowercorner,uppercorner,ROOT);
   double t = 0.;
   int z = 0;
-  for(t=0.; t<dt*12000; t+=dt)
+  for(t=0.; t<dt*160000; t+=dt)
     {
 
       for(int i=0; i<particles.size(); i++)
@@ -96,8 +96,7 @@ int main()
       root.Reset();
       
 
-       if(z%1000 == 0)
-       if(z%100 == 0)
+       if(z%500 == 0)
          {
            print_particles(particles, std::cout);
            printf("\n");

@@ -70,7 +70,7 @@ void Force::cyclethroughnodes(Node_vector_element_pointer n, Particle &i, double
           epsilon = 4./N;
         }
         else{
-          epsilon = 4.e-6/N;
+          epsilon = 4.e-2;
         }
     }
     if (r==0){

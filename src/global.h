@@ -10,11 +10,14 @@
 enum Node_Type{PARENT, LEAF, EMPTY, ROOT=10};
 
 /*Defines the different quadrants/octants each node can have
- NW =  negative x, positive y; NE = positive x and y; SE = positive x and negative y; SW = negative x and y
+ NW =  negative x, positive y; NE = positive x and y; 
+ SE = positive x and negative y; SW = negative x and y
  u = upper, which means positive z; l = lower, which means negative z
- u/l names are used for the 3-dimensional case, NOT u/l is for 2-dimensional case
+ u/l names are used for the 3-dimensional case, NOT u/l is for 
+ 2-dimensional case
  ROOT node is no quadrant of another node, so ROOT_ corresponds to this
- ERROR_ is for returning errors when a function needs to return a quad_octant_name and wants to return an error*/
+ ERROR_ is for returning errors when a function needs to return a 
+ quad_octant_name and wants to return an error*/
 enum quad_octant_name{NW=0, NE, SE, SW, uNW=0, uNE, uSE, uSW, lNW, lNE, lSE, lSW, ROOT_=100, ERROR_=-1};
 
 /* Number of dimensions */
