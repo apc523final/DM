@@ -15,12 +15,9 @@
 
 int main()
 {
-  //numchildren = 4;
+
 
   double dt = .0001;
-  int numx = 5;
-  int numy = 5;
-  double particlemass = 10.0;
   
   Particle_vector particles;
 
@@ -42,11 +39,16 @@ int main()
           particles.push_back(Particle(particlemass,x,y));;
         }
         }*/
-  particles.push_back(Particle(1.,-.5,1.));
-  particles.push_back(Particle(1.,.5,1.));
+  particles.push_back(Particle(1.,-.5,.5));
+  particles.push_back(Particle(1.,.5,.5));
 
-  particles[0].vx = -1./sqrt(2.);
-  particles[1].vx = 1./sqrt(2.);
+  lowercorner[0]=-10.0;
+  lowercorner[1]=-10.0;
+  uppercorner[0]=10.0;
+  uppercorner[1]=10.0;
+
+  particles[0].vy = -1./sqrt(2.);
+  particles[1].vy = 1./sqrt(2.);
   
   Force force;
   
@@ -86,11 +88,6 @@ int main()
 
         }
 
-      /*if(z%10 == 0)
-        {
-          print_particles(particles, std::cout);
-          printf("   %e   %e   %e   %e\n",root.children[0]->com[0],root.children[0]->com[1],root.children[1]->com[0],root.children[1]->com[1]);
-          }*/
       
       Node_vector_element_pointer initnodes;
       initnodes.push_back(&root);
@@ -100,10 +97,10 @@ int main()
       root.Reset();
       
 
-       if(z%400 == 0)
+       if(z%1000 == 0)
          {
            print_particles(particles, std::cout);
-           printf("       %e",total_energy(particles));
+           //printf("       %e",total_energy(particles));
            printf("\n");
          }      
       z++;

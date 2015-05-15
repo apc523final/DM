@@ -15,12 +15,11 @@
 
 int main()
 {
-  //numchildren = 4;
-
-  double dt = 1e-7;
+  double dt = 1e-4;
+  
   int numx = 5;
   int numy = 5;
-  double particlemass = 100.0;
+  double particlemass = 1.0;
   
   Particle_vector particles;
 
@@ -42,6 +41,14 @@ int main()
           particles.push_back(Particle(particlemass,x,y));;
         }
     }
+
+  lowercorner[0]=-500.0;
+  lowercorner[1]=-500.0;
+  uppercorner[0]=500.0;
+  uppercorner[1]=500.0;
+
+
+
   
   Force force;
   
@@ -89,6 +96,7 @@ int main()
       root.Reset();
       
 
+       if(z%1000 == 0)
        if(z%100 == 0)
          {
            print_particles(particles, std::cout);

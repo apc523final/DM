@@ -14,8 +14,7 @@ ALSO: FIX THE DANG HEADER FILE!
 */
 
 //Force Constructor
-Force::Force(int gravity/*=1*/)
-  : gravity_(gravity)
+Force::Force()
 {}
 
 //Force Destructor
