@@ -15,14 +15,10 @@
 
 int main()
 {
-  //numchildren = 4;
-
-  printf("#Theta is: %.4lf   and softening is: %d  \n",theta,use_softening);
-
-  double dt = 1e-5;
+  double dt = 1e-4;
   int numx = 5;
   int numy = 5;
-  double particlemass = 100.0;
+  double particlemass = 1.0;
   
   Particle_vector particles;
 
@@ -44,16 +40,10 @@ int main()
           particles.push_back(Particle(particlemass,x,y));;
         }
     }
-
-  lowercorner[0]=-5000.0;
-  lowercorner[1]=-5000.0;
-  uppercorner[0]=5000.0;
-  uppercorner[1]=5000.0;
-
   
   Force force;
   
-  const std::string integrator_name = "rk4";
+  const std::string integrator_name = "euler semi";
 
   Integrator *integrator = NULL;
   if (integrator_name.compare("euler") == 0) {
@@ -80,7 +70,7 @@ int main()
   Node root(lowercorner,uppercorner,ROOT);
   double t = 0.;
   int z = 0;
-  for(t=0.; t<dt*60000; t+=dt)
+  for(t=0.; t<dt*50000; t+=dt)
     {
 
       for(int i=0; i<particles.size(); i++)
@@ -97,10 +87,9 @@ int main()
       root.Reset();
       
 
-       if(z%300 == 0)
+       if(z%1000 == 0)
          {
-           //print_particles(particles, std::cout);
-           printf("%lf",total_energy(particles));
+           print_particles(particles, std::cout);
            printf("\n");
          }      
       z++;
