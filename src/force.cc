@@ -1,3 +1,7 @@
+/*force.cc
+Force class*/
+
+
 #include <stdio.h>
 #include <math.h>
 #include "node.h"
@@ -6,12 +10,9 @@
 #include <string>
 #include "global.h"
 
-int counter = 0;
-int nodecounter = 0;
-/*NOTE TO FUTURE KRISTINA: USE: https://github.com/Nbodypp/HOW_final/blob/master/src/force_direct.cc
-NEED TO FIX calculateforce function!
-ALSO: FIX THE DANG HEADER FILE!
-*/
+//Initialize counters - used for tests
+int counter = 0; //Num particles
+int nodecounter = 0; //Num nodes
 
 //Force Constructor
 Force::Force()
@@ -22,22 +23,19 @@ Force::~Force()
 {}
 
 
-//Function that calculates force
+//Function that updates acceleration
 void Force::updateacceleration(Node_vector_element_pointer n, Particle_vector &p)
 {
-  double N = p.size(); //num particles
+  double N = p.size(); //num particles input
   //Set acceleration to 0
   for (auto &a : p) {
     a.ax = 0.;
     a.ay = 0.;
-    // a.az = 0.;
-  }
-  // for (auto i = p.begin(); i != p.end(); ++i){
-  //    printf("Hi!, This is particle: %i\n", i);
-  //  	}
 
-  //Loop PROPERLY over particles and add to acceleration
-  // temp variables
+  }
+
+  //Loop over particles and add to acceleration
+
   for (auto i = p.begin(); i != p.end(); ++i) {
 
     cyclethroughnodes(n, *i, N);
@@ -48,7 +46,9 @@ void Force::updateacceleration(Node_vector_element_pointer n, Particle_vector &p
   
 }
 
+//Cycles through nodes and adds acceleration from each node on particle
 void Force::cyclethroughnodes(Node_vector_element_pointer n, Particle &i, double N){
+  //initialize temporary variables
   double r, dax, day, l, jx, jy, jmass, epsilon, d;
   d = 0.;
   epsilon = 0.;
@@ -59,12 +59,18 @@ void Force::cyclethroughnodes(Node_vector_element_pointer n, Particle &i, double
   jx=0.;
   jy=0.;
   jmass=0.;
+  //Loop through nodes
   for (auto j = n.begin(); j != n.end(); ++j) {
+    //If node has no particles, go to next node
     if( (*j)->whatami == EMPTY)
       {
         continue;
       }
+
+    //Calculate distance between node COM and particle  
     r = calculateseparation(i, *j);
+
+    //Apply softening parameter
     if (use_softening){
         if(N>100){
           epsilon = 4./N;
@@ -73,13 +79,19 @@ void Force::cyclethroughnodes(Node_vector_element_pointer n, Particle &i, double
           epsilon = 4.e-2;
         }
     }
+
+    //If the node is the one containing the particle, go to
+    //next node
     if (r==0){
-      //printf("#This is me! Proceed to next node please!\n");
       nodecounter+=1;
       continue;
     }
-
+    //Calculate the length of the node
     l = (*j)->uppercorner[0]-(*j)->lowercorner[0];
+
+    //See if node is far enough away to use COM approximation
+    //or if node is already a leaf node, in which case
+    //can also use COM
     if ((l/r<theta) || ((*j)->whatami == LEAF)){
       jx = (*j)->com[0];
       jy = (*j)->com[1];
@@ -92,6 +104,9 @@ void Force::cyclethroughnodes(Node_vector_element_pointer n, Particle &i, double
       i.ay += jmass * day;
       nodecounter+=1;
     }
+
+    //Else, find children nodes, and 
+    //cycle through those nodes
     else{
       Node_vector_element_pointer childs;
       for(int k=0; k<numchildren; k++){
@@ -107,6 +122,8 @@ void Force::cyclethroughnodes(Node_vector_element_pointer n, Particle &i, double
   
 }
 
+//Calculates distance between a particle and the center of mass
+//of a node
 double Force::calculateseparation(Particle &part, Node *nod)
 {
   double jx_, jy_;
