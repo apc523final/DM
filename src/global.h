@@ -35,7 +35,7 @@ const int numdimen = 2;
      }*/
 const int numchildren = 4;
 
-const double theta = 0.; //Parameter for deciding when to calculate using COM or going to children nodes
+const double theta = 1.; //Parameter for deciding when to calculate using COM or going to children nodes
 
 const double G = 1.;
 
@@ -43,7 +43,7 @@ const double rmin = 1e-1;
 
 const double dx = .1; //Used in courant condition
 
-const double C = 1.; //Courant number
+const double C = 1; //Courant number
 
 const bool use_softening = true; //Use softening parameter
 

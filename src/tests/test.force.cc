@@ -147,6 +147,7 @@ int main()
     }
 
 
+  //check force
   Node_vector_element_pointer initnodes;
   initnodes.push_back(&root);
 

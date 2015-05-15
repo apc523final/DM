@@ -16,6 +16,8 @@
 int main()
 {
   double dt = 1e-4;
+
+  double dt = 1e-7;
   int numx = 5;
   int numy = 5;
   double particlemass = 1.0;
@@ -71,6 +73,7 @@ int main()
   double t = 0.;
   int z = 0;
   for(t=0.; t<dt*50000; t+=dt)
+  for(t=0.; t<dt*12000; t+=dt)
     {
 
       for(int i=0; i<particles.size(); i++)
@@ -88,6 +91,7 @@ int main()
       
 
        if(z%1000 == 0)
+       if(z%100 == 0)
          {
            print_particles(particles, std::cout);
            printf("\n");

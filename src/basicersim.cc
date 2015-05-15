@@ -15,9 +15,13 @@
 
 int main()
 {
+
+
   double dt = .0001;
   
   Particle_vector particles;
+
+
 
   double lowercorner[2];
   double uppercorner[2];
