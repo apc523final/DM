@@ -1,17 +1,19 @@
+/*runge-kutta.cc
+Runge-Kutta method*/
+
 #include "runge-kutta.h"
 
-/**
- * @param dt timestep
- * @param force Force model
- */
+//Constructor
 RungeKutta4::RungeKutta4(const double dt, Force &force)
   : dt_(dt),
     force_(force) {
 }
 
+//Destructor
 RungeKutta4::~RungeKutta4()
 {}
 
+//Integrates one step forward using Runge-Kutta method
 int RungeKutta4::step(double t, Particle_vector &p, Node_vector_element_pointer nodes) {
   k1 = p;
   force_.updateacceleration(nodes, k1);

@@ -16,7 +16,7 @@ Euler_SI::Euler_SI(double dt, Force &force)
 Euler_SI::~Euler_SI() {
 }
 
-//Integrates one step forward using Forward Euler method
+//Integrates one step forward using Semi-Implicit Euler method
 int Euler_SI::step(double t, Particle_vector &particles, Node_vector_element_pointer nodes) {
 
   force_.updateacceleration(nodes, particles); //Use force method to update acceleration

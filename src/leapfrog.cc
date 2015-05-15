@@ -1,35 +1,30 @@
-/**
- * @file leapfrog.cc
- * @brief Forward Euler integrator
- */
+/*leapfrog.cc
+Leapfrog Method*/
 
 #include "leapfrog.h"
 
-/**
- * Constructor.
- * @param dt timestep
- * @param force Force model
- */
+//Constructor
 Leapfrog::Leapfrog(double dt, Force &force)
   : dt_(dt),
     force_(force) {
 }
 
+//Destructor
 Leapfrog::~Leapfrog() {
 }
 
-/**
- * Inegrate particles' position and velocity for one time step.
- */
+//Integrates one step forward using Leapfrog method
 int Leapfrog::step(double t, Particle_vector &particles, Node_vector_element_pointer nodes) {
 
-  force_.updateacceleration(nodes, particles);
-  advance_vel(0.5*dt_, particles);
+  force_.updateacceleration(nodes, particles); //Use Force method to update acceleration
+  advance_vel(0.5*dt_, particles); //advance velocities by a half step
+  //find half-way positions
   for (auto &ptmp : particles) {
     ptmp.x += dt_ * ptmp.vx;
     ptmp.y += dt_ * ptmp.vy;
   }
-  force_.updateacceleration(nodes, particles);
+
+  force_.updateacceleration(nodes, particles); //update acceleration again
   advance_vel(0.5*dt_, particles);  // sync vel with position
   return 0;
 }
