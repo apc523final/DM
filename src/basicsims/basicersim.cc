@@ -106,5 +106,7 @@ int main()
       z++;
     }
 
+  delete integrator;
+  
   return 0;
 }

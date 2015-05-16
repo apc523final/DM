@@ -13,13 +13,16 @@
 #include "euler_semi_implicit.h"
 
 
-int main()
+int main(int argc; char **argv)
 {
   double dt = .8e-3;
   
   int numx = 5;
   int numy = 5;
   double particlemass = 1.0;
+
+  if(argc != 2) return;
+  int N = atoi(argv[1]);
   
   Particle_vector particles;
 
@@ -82,7 +85,7 @@ int main()
   Node root(lowercorner,uppercorner,ROOT);
   double t = 0.;
   int z = 0;
-  for(t=0.; t<dt*800; t+=dt)
+  for(t=0.; t<dt*8000; t+=dt)
     {
 
       for(int i=0; i<particles.size(); i++)

@@ -23,22 +23,11 @@ enum quad_octant_name{NW=0, NE, SE, SW, uNW=0, uNE, uSE, uSW, lNW, lNE, lSE, lSW
 /* Number of dimensions */
 const int numdimen = 2;
 
-/*Based on number of dimensions, set the number of children*/
-/*if(numdimen == 2)
-  {
-    numchildren = 4;
-  }
- else if(numdimen == 3)
-   {
-     numchildren = 8;
-   }
- else
-   {
-     printf("WARNING! WARNING! Unknown number of dimensions defined!  It is %d\n",numdimen);
-     }*/
+/*Number of children nodes per branch/parent node*/
 const int numchildren = 4;
 
-const double theta = 1.; //Parameter for deciding when to calculate using COM or going to children nodes
+const double theta = 1.; //Parameter for deciding when to calculate
+//using COM or going to children nodes
 
 const double G = 1.; //Gravitational constant
 
