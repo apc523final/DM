@@ -12,7 +12,7 @@ class Euler_SI : public Integrator {
  public:
   Euler_SI(double dt, Force &force); //Constructor
   ~Euler_SI(); //Destuctor
-  //Integrates one step forward using Forward Euler method
+  //Integrates one step forward using Semi-Implicit Euler method
   int step(double t, Particle_vector &particles, Node_vector_element_pointer nodes);
  
  private:

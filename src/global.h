@@ -23,13 +23,12 @@ enum quad_octant_name{NW=0, NE, SE, SW, uNW=0, uNE, uSE, uSW, lNW, lNE, lSE, lSW
 /* Number of dimensions */
 const int numdimen = 2;
 
-/*Number of children nodes per branch/parent node*/
-const int numchildren = 4;
+const int numchildren = 4; //Parameter which gives the number of children each node should birth
 
 const double theta = 1.; //Parameter for deciding when to calculate
 //using COM or going to children nodes
 
-const double G = 1.; //Gravitational constant
+const double G = 1.; //Gravitational constant, which we set to 1 for easier calculations
 
 const bool use_softening = true; //Use softening parameter
 
