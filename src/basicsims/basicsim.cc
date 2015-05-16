@@ -36,7 +36,7 @@ int main()
         {
           double x = ( ((double)i+.5)/((double)(numx))) * (uppercorner[0] - lowercorner[0]) + lowercorner[0];
           double y = ( ((double)j+.5)/((double)(numy))) * (uppercorner[1] - lowercorner[1]) + lowercorner[1];
-          particles.push_back(Particle(particlemass,x,y));;
+          particles.push_back(Particle(particlemass,x,y));
         }
     }
 
