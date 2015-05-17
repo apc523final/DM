@@ -10,7 +10,7 @@ CXX=g++
 %.o: %.cc
 	$(CXX) -c $(CFLAGS) -o $@ $^
 
-all: basicsim basicersim
+all: basicsim basicersim example
 
 tests: test testforce scaling
 
@@ -18,6 +18,9 @@ basicsim: $(addprefix $(basicsimdir)/, basicsim.o) node.o particle.o euler.o for
 	$(CXX) $(CFLAGS) -o $@ $^
 
 basicersim: $(addprefix $(basicsimdir)/, basicersim.o) node.o particle.o euler.o force.o runge-kutta.o leapfrog.o euler_semi_implicit.o
+	$(CXX) $(CFLAGS) -o $@ $^
+
+example: example.main.o node.o particle.o euler.o force.o runge-kutta.o leapfrog.o euler_semi_implicit.o
 	$(CXX) $(CFLAGS) -o $@ $^
 
 scaling: $(addprefix $(testdir)/, scaling.o) node.o particle.o euler.o force.o runge-kutta.o leapfrog.o
@@ -32,4 +35,4 @@ testforce: $(addprefix $(testdir)/, test.force.o) node.o particle.o euler.o forc
 
 
 clean:
-	-rm -rf *.o tests/*.o basicsims/*.o basicsim basicersim test testforce scaling
+	-rm -rf *.o tests/*.o basicsims/*.o basicsim basicersim test testforce scaling example
