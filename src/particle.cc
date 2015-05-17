@@ -28,14 +28,6 @@ Particle::Particle(double mass, double x, double y)
 Particle::~Particle()
 {}
 
-
-/*/Calculate the distance between two particles.
-double Particle::d(Particle &p) {
-  return sqrt(pow((p.x-this->x), 2) +
-              pow((p.y-this->y), 2));
-}*/
-
-
 /*
  * Print formatted position of all particles
  */
