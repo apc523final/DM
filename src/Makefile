@@ -32,4 +32,4 @@ testforce: $(addprefix $(testdir)/, test.force.o) node.o particle.o euler.o forc
 
 
 clean:
-	-rm -rf *.o tests/*.o basicsims/*.o basicsim basicersim test testforce
+	-rm -rf *.o tests/*.o basicsims/*.o basicsim basicersim test testforce scaling
