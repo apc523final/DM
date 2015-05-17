@@ -1,7 +1,6 @@
 /*force.cc
 Force class*/
 
-
 #include <stdio.h>
 #include <math.h>
 #include "node.h"
@@ -9,10 +8,6 @@ Force class*/
 #include "force.h"
 #include <string>
 #include "global.h"
-
-//Initialize counters - used for tests
-int counter = 0; //Num particles
-int nodecounter = 0; //Num nodes
 
 //Force Constructor
 Force::Force()
@@ -28,21 +23,21 @@ void Force::updateacceleration(Node_vector_element_pointer n, Particle_vector &p
 {
   double N = p.size(); //num particles input
   //Set acceleration to 0
-  for (auto &a : p) {
-    a.ax = 0.;
-    a.ay = 0.;
-
-  }
+  for (auto &a : p)
+    {
+      a.ax = 0.;
+      a.ay = 0.;
+    }
 
   //Loop over particles and add to acceleration
 
-  for (auto i = p.begin(); i != p.end(); ++i) {
-
-    cyclethroughnodes(n, *i, N);
-    counter+=1;
-    i->ax *= G;
-    i->ay *= G;
-  }
+  for (auto i = p.begin(); i != p.end(); ++i)
+    {
+      cyclethroughnodes(n, *i, N);
+      counter+=1;
+      i->ax *= G;
+      i->ay *= G;
+    }
   
 }
 
@@ -71,7 +66,8 @@ void Force::cyclethroughnodes(Node_vector_element_pointer n, Particle &i, double
     r = calculateseparation(i, *j);
 
     //Apply softening parameter
-    if (use_softening){
+    if (use_softening)
+      {
         if(N>100){
           epsilon = 4./N;
         }
@@ -79,45 +75,46 @@ void Force::cyclethroughnodes(Node_vector_element_pointer n, Particle &i, double
           epsilon = 4.e-2;
         }
     }
-
+    
     //If the node is the one containing the particle, go to
     //next node
-    if (r==0){
-      nodecounter+=1;
-      continue;
-    }
+    if (r==0)
+      {
+        continue;
+      }
     //Calculate the length of the node
     l = (*j)->uppercorner[0]-(*j)->lowercorner[0];
-
+    
     //See if node is far enough away to use COM approximation
     //or if node is already a leaf node, in which case
     //can also use COM
-    if ((l/r<theta) || ((*j)->whatami == LEAF)){
-      jx = (*j)->com[0];
-      jy = (*j)->com[1];
-      jmass = (*j)->mass;
-      d = sqrt(pow(r,2)+ pow(epsilon,2));
-
-      dax = (jx - i.x) / pow(d, 3);
-      day = (jy - i.y) / pow(d, 3);
-      i.ax += jmass * dax;
-      i.ay += jmass * day;
-      nodecounter+=1;
+    if ((l/r<theta) || ((*j)->whatami == LEAF))
+      {
+        jx = (*j)->com[0];
+        jy = (*j)->com[1];
+        jmass = (*j)->mass;
+        d = sqrt(pow(r,2)+ pow(epsilon,2));
+        
+        dax = (jx - i.x) / pow(d, 3);
+        day = (jy - i.y) / pow(d, 3);
+        i.ax += jmass * dax;
+        i.ay += jmass * day;
     }
-
+    
     //Else, find children nodes, and 
     //cycle through those nodes
-    else{
-      Node_vector_element_pointer childs;
-      for(int k=0; k<numchildren; k++){
-        if ((*j)->children[k]==NULL){
-          continue;
-        }
-        childs.push_back((*j)->children[k]);
+    else
+      {
+        Node_vector_element_pointer childs;
+        for(int k=0; k<numchildren; k++){
+          if ((*j)->children[k]==NULL){
+            continue;
+          }
+          childs.push_back((*j)->children[k]);
       }
-      cyclethroughnodes(childs, i, N);
-    }
-
+        cyclethroughnodes(childs, i, N);
+      }
+    
   }
   
 }
