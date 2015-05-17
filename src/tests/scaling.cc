@@ -10,7 +10,7 @@
 #include "force.h"
 #include "runge-kutta.h"
 #include "leapfrog.h"
-#include "euler_semi_implicit.h"
+#include "global.h"
 
 
 int main(int argc, char **argv)
@@ -26,10 +26,10 @@ int main(int argc, char **argv)
 
   double lowercorner[2];
   double uppercorner[2];
-  lowercorner[0]=-100.0;
-  lowercorner[1]=-100.0;
-  uppercorner[0]=100.0;
-  uppercorner[1]=100.0;
+  lowercorner[0]=-10.0;
+  lowercorner[1]=-10.0;
+  uppercorner[0]=10.0;
+  uppercorner[1]=10.0;
 
   for(int i=0; i<N; i++)
     {
@@ -38,9 +38,12 @@ int main(int argc, char **argv)
           double x = ( ((double)i+.5)/((double)(N))) * (uppercorner[0] - lowercorner[0]) + lowercorner[0];
           double y = ( ((double)j+.5)/((double)(N))) * (uppercorner[1] - lowercorner[1]) + lowercorner[1];
           particles.push_back(Particle(particlemass,x,y));
+          particles.push_back(Particle(particlemass,x+40.,y));                    
         }
     }
 
+  printf("%lu   %lf\n",particles.size(),theta);
+  
   //particles.push_back(Particle(particlemass,.75,.75));
 
   //particles[12].x += 0.;
@@ -70,10 +73,6 @@ int main(int argc, char **argv)
   else if (integrator_name.compare("rk4") == 0) {
     //printf("#Setting up a runge-kutta integrator\n");
     integrator = new RungeKutta4(dt, force);
-    }
-  else if (integrator_name.compare("euler semi") == 0) {
-    //printf("#Setting up an euler-semi-implicit integrator\n");
-    integrator = new Euler_SI(dt, force);
   }
   if (integrator == NULL) {
     fprintf(stderr, "ERROR: integrator %s is not known\n",

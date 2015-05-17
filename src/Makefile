@@ -20,8 +20,8 @@ basicsim: $(addprefix $(basicsimdir)/, basicsim.o) node.o particle.o euler.o for
 basicersim: $(addprefix $(basicsimdir)/, basicersim.o) node.o particle.o euler.o force.o runge-kutta.o leapfrog.o euler_semi_implicit.o
 	$(CXX) $(CFLAGS) -o $@ $^
 
-scaling: $(addprefix $(testdir)/, scaling.o) node.o particle.o euler.o force.o runge-kutta.o leapfrog.o euler_semi_implicit.o
-	$(CXX) $(CFLAGS) -o $@ $^
+scaling: $(addprefix $(testdir)/, scaling.o) node.o particle.o euler.o force.o runge-kutta.o leapfrog.o
+	$(CXX) $(CFLAGS) -o scaling $^
 
 
 test: $(addprefix $(testdir)/, test.main.o) node.o particle.o euler.o force.o runge-kutta.o leapfrog.o
