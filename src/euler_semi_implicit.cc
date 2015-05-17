@@ -1,5 +1,9 @@
 /*euler_semi_implicit.cc
-Semi-Impliciti Euler Method*/
+Semi-Impliciti Euler Method
+The code for this integration scheme was modified by us, borrowed from 
+Joshua Wallace's APC 523 project of the previous semester; 
+we give proper credit to his partners, Semyeong Oh and Cole Holcomb, with 
+whom the original version of this code was developed in collaboration.*/
 
 #include "euler_semi_implicit.h"
 #include "particle.h"

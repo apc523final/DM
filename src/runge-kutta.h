@@ -1,5 +1,9 @@
 /*runge-kutta.h
-Header file for Runge-Kutta Method*/
+Header file for Runge-Kutta Method
+The code for this integration scheme was modified by us, borrowed from 
+Joshua Wallace's APC 523 project of the previous semester; 
+we give proper credit to his partners, Semyeong Oh and Cole Holcomb, with 
+whom the original version of this code was developed in collaboration.*/
 
 #ifndef RUNGE_KUTTA_H_
 #define RUNGE_KUTTA_H_

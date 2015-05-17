@@ -1,5 +1,9 @@
 /*runge-kutta.cc
-Runge-Kutta method*/
+Runge-Kutta method
+The code for this integration scheme was modified by us, borrowed from 
+Joshua Wallace's APC 523 project of the previous semester; 
+we give proper credit to his partners, Semyeong Oh and Cole Holcomb, with 
+whom the original version of this code was developed in collaboration.*/
 
 #include "runge-kutta.h"
 

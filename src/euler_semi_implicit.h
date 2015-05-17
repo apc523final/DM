@@ -1,5 +1,9 @@
 /*euler_semi_implicit.h
-Header file for Semi-Implicit Euler Integrator*/
+Header file for Semi-Implicit Euler Integrator
+The code for this integration scheme was modified by us, borrowed from 
+Joshua Wallace's APC 523 project of the previous semester; 
+we give proper credit to his partners, Semyeong Oh and Cole Holcomb, with 
+whom the original version of this code was developed in collaboration.*/
 
 #ifndef EULER_SI_H_
 #define EULER_SI_H_
