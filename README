@@ -33,5 +33,7 @@ were outputted to a file named 'output.txt', the following command
 
 python vis.py output.txt
 
-will provide a visualization of the particle positions given in output.txt.
+if vispy is installed, will provide a visualization of the particle 
+positions given in output.txt.  Vispy can be installed at 
+https://github.com/vispy/vispy.
 
