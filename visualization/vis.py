@@ -3,6 +3,8 @@
 Script to visualize N-body system using OpenGL
 
 requires vispy development version https://github.com/vispy/vispy
+
+Script writing credit:  Semyeong Oh, adapted for our output
 """
 import sys
 import argparse

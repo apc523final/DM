@@ -34,4 +34,5 @@ were outputted to a file named 'output.txt', the following command
 python vis.py output.txt
 
 will provide a visualization of the particle positions given in output.txt.
+Script credit: Semyeong Oh, adapted for our purposes.
 
