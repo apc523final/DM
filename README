@@ -1,0 +1,37 @@
+# DM
+
+Directories:
+  src - where the source code is
+      src/tests - where our test codes are stored
+      src/basicsims - some of the basic simulations we created to test our code
+          Note: see README in each of these directories for more information
+  visualization - code implementing vispy to visualize the output
+
+PLEASE NOTE THE FOLLOWING:
+Our code requires C++11 compiler such as clang version>=3.3 or gcc
+version>=4.6
+
+Github repo of the code can be found at
+https://github.com/apc523final/DM.git
+
+**Example Code**
+
+An example code that runs a very basic simulation can be found in src/example.main.cc.
+All the essential elements of a workable simulation can be found there.  We refer
+interested persons to that example script.  It can be compiled
+(in the src directory) with
+
+make example
+
+**Visualization Code**
+
+A simulation which prints out the positions of the particles using the
+print_particles() function (written in particle.{cc,h}) with a newline
+after every time step can be visualized movie-style with the Python
+script in the visualization/ directory.  If these particle positions 
+were outputted to a file named 'output.txt', the following command
+
+python vis.py output.txt
+
+will provide a visualization of the particle positions given in output.txt.
+

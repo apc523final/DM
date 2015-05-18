@@ -1,0 +1,10 @@
+This directory contains source code for some of our tests.
+Since the code was mostly for testing rather than application
+purposes, it was not fully commented, so reader beware.
+
+scaling.cc - used to test the scaling of our code with number of particles
+
+test.force.cc - used to test the force calculations in our code
+
+test.main.cc - used to test the creation and implementation of the
+    tree structure in our code
